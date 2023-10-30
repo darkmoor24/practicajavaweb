@@ -1,0 +1,65 @@
+@import "~@flaticon/flaticon-uicons/css/all/all";
+
+.loader {
+	width: 100vw;
+	height: 100vh;
+}
+
+.loader-container {
+	position: absolute;
+	z-index: 200;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.loader-spinner {
+	position: relative;
+	width: 100px;
+	height: 100px;
+}
+
+.loader-spinner:before,
+.loader-spinner:after {
+	content: "";
+	border-radius: 50%;
+	position: absolute;
+	inset: 0;
+	box-shadow: 0 0 10px 2px rgba(100, 97, 97, 0.399) inset;
+}
+.loader-spinner:after {
+	box-shadow: 0 2px 0 #15077e inset;
+	animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+	0% {
+		transform: rotate(0);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+
+.Mui-TableHeadCell-Content {
+	justify-content: center!important;
+}
+
+.MuiTableCell-root {
+	text-align: center!important;
+}
+
+.css-1qmwz0i-MuiSwitch-root .MuiSwitch-track {
+    background-color: #121212!important;
+}
+
+.css-1qmwz0i-MuiSwitch-root .MuiSwitch-switchBase.Mui-checked+.MuiSwitch-track {
+    background-color: #2ECA45!important;
+}
+
+.MuiFormControlLabel-label {
+	padding-left: 0.5rem;
+}
