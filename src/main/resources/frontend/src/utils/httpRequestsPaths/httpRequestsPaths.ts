@@ -1,17 +1,19 @@
 const httpRequestsPaths = {
-    producto: {
-        getProductos: 'get-productos',
-        deleteProducto: 'delete-producto'
+	producto: {
+		getProductos: "get-productos",
+		deleteProducto: "delete-producto",
+        addProducto: 'add-producto',
+        updateProducto: 'update-producto'
+	},
+	proveedor: {
+        getProveedores: 'get-proveedores'
     },
-    proveedor: {
-
-    },
-    proveedorProducto: {
-
-    },
-    tipoProducto: {
-        getTiposProducto: 'get-tipos-producto'
-    }
+	proveedorProducto: {
+		getProveedoresProducto: "get-proveedores-producto"
+	},
+	tipoProducto: {
+		getTiposProducto: "get-tipos-producto",
+	},
 };
 
 export default httpRequestsPaths;

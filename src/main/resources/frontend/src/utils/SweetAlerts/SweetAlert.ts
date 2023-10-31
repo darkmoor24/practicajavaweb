@@ -1,6 +1,8 @@
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
+export const mySwal = withReactContent(Swal);
+
 const Toast = Swal.mixin({
 	toast: true,
 	position: "bottom-end",
@@ -32,8 +34,6 @@ export const ModalSweetAlert = (options: any) => {
 				allowEscapeKey: false,
 				width: 950,
 			};
-
-			const mySwal = withReactContent(Swal);
 
 			const { isConfirmed, isDismissed } = await mySwal.fire({
 				...basicSweetAlertOptions,

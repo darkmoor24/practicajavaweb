@@ -17,7 +17,7 @@ CREATE TABLE proveedor(
 CREATE TABLE producto(
 	id_producto			INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nombre				VARCHAR(90),
-    clave				VARCHAR(30),
+    clave				VARCHAR(30) UNIQUE,
     costo				DOUBLE,
     estatus				INT NOT NULL DEFAULT 1,
     id_tipo_producto	INT NOT NULL,
@@ -43,15 +43,19 @@ CREATE TABLE proveedor_producto(
 CREATE VIEW viewObtenerTiposProductos AS 
 SELECT tp.id_tipo_producto, tp.nombre, tp.descripcion FROM tipo_producto tp;
 
--- L        istar productos
+-- Listar productos
 CREATE VIEW viewObtenerProductos AS 
 SELECT p.nombre, p.clave, p.costo, p.id_producto, p.id_tipo_producto, p.estatus FROM producto p INNER JOIN tipo_producto tp ON p.id_tipo_producto = tp.id_tipo_producto;
 
--- Listar p     roveedores producto
+-- Listar proveedores producto
 CREATE VIEW viewObtenerProveedoresProducto AS
-SELECT pp.id_proveedor_producto, pp.clave_proveedor, pp.costo_proveedor, pr.nombre, p.id_producto FROM proveedor_producto pp 
+SELECT pp.id_proveedor_producto, pp.clave_proveedor, pp.costo_proveedor, pr.nombre, p.id_producto, pp.id_proveedor FROM proveedor_producto pp 
 INNER JOIN proveedor pr ON pp.id_proveedor = pr.id_proveedor
 INNER JOIN producto p ON pp.id_producto = p.id_producto;  
+
+-- Listar proveedores 
+CREATE VIEW viewObtenerProveedores AS
+SELECT * FROM proveedor;
 
 # Stored Procedures
 
@@ -66,6 +70,7 @@ CREATE PROCEDURE spAgregarProducto(
 )            
 	BEGIN
 		INSERT INTO producto (nombre, clave, costo, id_tipo_producto) VALUES (v_nombre, v_clave, v_costo, v_id_tipo_producto);
+        #SELECT id_producto INTO v_aux FROM producto WHERE clave = v_clave;
     END $$              
 DELIMITER ;
 
@@ -91,6 +96,14 @@ CREATE PROCEDURE spObtenerTiposProductos ()
     END $$
 DELIMITER ;
 
+-- Listar tipos de producto
+DELIMITER $$
+CREATE PROCEDURE spObtenerProveedores ()
+	BEGIN
+		SELECT * FROM viewObtenerProveedores;
+    END $$
+DELIMITER ;
+
 -- Listar productos por tipo producto y clave (coincidencias de clave)
 DELIMITER $$
 CREATE PROCEDURE spObtenerProductos (
@@ -106,10 +119,18 @@ CREATE PROCEDURE spObtenerProductos (
     END $$              
 DELIMITER ;
 
+-- Obtener producto por clave (campo unique)
+DELIMITER $$
+CREATE PROCEDURE spObtenerProductoByClave (IN v_clave VARCHAR(30))            
+	BEGIN
+		SELECT p.id_producto, p.nombre, p.clave, p.costo, p.estatus, p.id_tipo_producto FROM viewObtenerProductos p WHERE p.clave = v_clave;
+    END $$              
+DELIMITER ;
+
 DELIMITER $$
 CREATE PROCEDURE spObtenerProveedoresProducto (IN v_id_producto INT)
 	BEGIN
-		SELECT pp.id_proveedor_producto, pp.nombre, pp.clave_proveedor, pp.costo_proveedor FROM viewObtenerProveedoresProducto pp WHERE pp.id_producto = v_id_producto;
+		SELECT pp.id_producto, pp.id_proveedor, pp.id_proveedor_producto, pp.nombre, pp.clave_proveedor, pp.costo_proveedor FROM viewObtenerProveedoresProducto pp WHERE pp.id_producto = v_id_producto;
     END $$  
 DELIMITER ; 
 
@@ -181,3 +202,5 @@ INSERT INTO proveedor (nombre, descripcion) VALUES
 # Datos de prueba
 CALL spAgregarProducto('Pinol 350ml', 'PINOL350', 25.5, 1);
 CALL spAgregarNuevoProveedorProducto('ML-350-PINO', 22.6, 1, 1);
+CALL spAgregarNuevoProveedorProducto('PINOML-350', 22.1, 2, 1);
+CALL spAgregarNuevoProveedorProducto('ML-350-PINO', 22.6, 3, 1);

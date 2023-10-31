@@ -11,13 +11,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "proveedor_producto")
+@Table(name = "viewobtenerproveedoresproducto")
 public class ProveedorProducto {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_proveedor_producto", nullable = false)
     private Integer idProveedorProducto;
+
+    @Basic
+    @Column(name = "nombre", length = 30)
+    private String nombre;
 
     @Basic
     @Column(name = "clave_proveedor", length = 30)
@@ -27,19 +31,19 @@ public class ProveedorProducto {
     @Column(name = "costo_proveedor")
     private Double costoProveedor;
 
-//    @Basic
-//    @Column(name = "id_proveedor", nullable = false)
-//    private Integer idProveedor;
-//
-//    @Basic
-//    @Column(name = "id_producto", nullable = false)
-//    private Integer idProducto;
+    @Basic
+    @Column(name = "id_proveedor", nullable = false)
+    private Integer idProveedor;
 
-    @ManyToOne
-    @JoinColumn(name = "id_proveedor", referencedColumnName = "id_proveedor", nullable = false)
-    private Proveedor proveedorByIdProveedor;
+    @Basic
+    @Column(name = "id_producto", nullable = false)
+    private Integer idProducto;
 
-    @ManyToOne
-    @JoinColumn(name = "id_producto", referencedColumnName = "id_producto", nullable = false)
-    private Producto productoByIdProducto;
+//    @ManyToOne
+//    @JoinColumn(name = "id_proveedor", referencedColumnName = "id_proveedor", nullable = false)
+//    private Proveedor proveedorByIdProveedor;
+
+//    @ManyToOne
+//    @JoinColumn(name = "id_producto", referencedColumnName = "id_producto", nullable = false)
+//    private Producto productoByIdProducto;
 }

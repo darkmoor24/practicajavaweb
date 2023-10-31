@@ -27,7 +27,7 @@ public class Proveedor {
     @Column(name = "descripcion", length = 90)
     private String descripcion;
 
-    @OneToMany(mappedBy = "proveedorByIdProveedor")
-    private ArrayList<ProveedorProducto> proveedorProductosByIdProveedor;
+//    @OneToMany(mappedBy = "proveedorByIdProveedor")
+//    private ArrayList<ProveedorProducto> proveedorProductosByIdProveedor;
 
 }

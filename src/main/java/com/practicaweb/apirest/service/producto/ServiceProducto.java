@@ -12,17 +12,31 @@ public class ServiceProducto {
     @Autowired
     private IProductoRepository iProductoRepository;
 
-    public void addProducto(String nombre, String clave, double costo, int idTipoProducto) {
+    public Integer addProducto(String nombre, String clave, double costo, int idTipoProducto) {
         try {
-            iProductoRepository.addProducto(nombre, clave, costo, idTipoProducto);
+            //return iProductoRepository.addProducto(nombre, clave, costo, idTipoProducto, idProducto);
+            return iProductoRepository.addProducto(nombre, clave, costo, idTipoProducto);
         } catch (Exception ex) {
             ex.printStackTrace();
-        }
 
+            return 0;
+        }
     }
 
     public ArrayList<Producto> getProductos(int idTipoProducto, String clave) {
         return iProductoRepository.getProductos(idTipoProducto, clave);
+    }
+
+    public Producto getProductoByClave(String clave) {
+        return iProductoRepository.getProductoByClave(clave);
+    }
+
+    public void updateProducto(String nombre, String clave, Double costo, int estatus, int idTipoProducto, int idProducto) {
+        try {
+            iProductoRepository.updateProducto(nombre, clave, costo, estatus, idTipoProducto, idProducto);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void deleteProductoById(int idProducto) {
@@ -31,6 +45,5 @@ public class ServiceProducto {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
     }
 }

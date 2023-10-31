@@ -53,6 +53,21 @@ interface IProducto {
 	idProducto: number;
 	idTipoProducto: number;
 	estatus: number;
+	proveedores: Array<IProveedorProducto> | [];
+}
+
+interface IProveedorProducto {
+    idProveedor: string | number | readonly string[] | undefined;
+	idProveedorProducto: number;
+	nombre: string;
+	claveProveedor: string;
+	costoProveedor: double;
+}
+
+interface IProveedor {
+	idProveedor: number;
+	nombre: string;
+	descripcion: string;
 }
 
 declare type IPropsFormularioBusqueda = {
@@ -76,6 +91,11 @@ declare type IPropsEliminarProducto = {
 	setProductoEliminado: (productoEliminado: boolean) => void;
 };
 
+declare type IPropsEliminarProveedor = {
+	eliminarProveedor: () => void;
+	swalRef: SweetAlert2 & ReactSweetAlert;
+};
+
 declare type IPropsFullScreenDialog = {
 	open: boolean;
 	setOpen: (open: boolean) => void;
@@ -87,4 +107,11 @@ declare type IPropsAddUpdateProducto = {
 	setFormValues: (formValues: IProducto) => void;
 	tiposProducto: any;
 	proveedores?: any;
+	callback?: Function;
+};
+
+declare type IPropsAddUpdateProveedorProducto = {
+	updateProveedoresList: (datosProveedorModificado: IProveedorProducto) => void;
+	proveedor: IProveedorProducto;
+	swalRef: SweetAlert2 & ReactSweetAlert;
 };

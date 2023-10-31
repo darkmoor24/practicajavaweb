@@ -1,17 +1,16 @@
 package com.practicaweb.apirest.controller.producto;
 
 import com.practicaweb.apirest.model.producto.Producto;
+import com.practicaweb.apirest.model.proveedorproducto.ProveedorProducto;
 import com.practicaweb.apirest.service.producto.ServiceProducto;
+import com.practicaweb.apirest.service.proveedorproducto.ServiceProveedorProducto;
 import com.practicaweb.apirest.utils.Config;
 import com.practicaweb.apirest.utils.CreateJSONResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @CrossOrigin(origins = {"*"})
@@ -20,11 +19,15 @@ public class ControllerProducto {
 
     @Autowired
     private ServiceProducto serviceProducto;
+    @Autowired
+    private ServiceProveedorProducto serviceProveedorProducto;
 
     @PostMapping(Config.EndpointResourcesPaths.Producto.ADD_PRODUCTO)
     public ResponseEntity<Map<String, Object>> addProducto(@RequestBody Producto producto) {
         try {
             serviceProducto.addProducto(producto.getNombre(), producto.getClave(), producto.getCosto(), producto.getIdTipoProducto());
+
+            producto.getProveedoresProducto().forEach(proveedorProducto -> serviceProveedorProducto.addProveedorProducto(proveedorProducto.getClaveProveedor(), proveedorProducto.getCostoProveedor(), proveedorProducto.getIdProveedor(), serviceProducto.getProductoByClave(producto.getClave()).getIdProducto()));
 
             return ResponseEntity.ok(CreateJSONResponse.createOkResponse("Producto agregado", true));
         } catch (Exception ex) {
@@ -62,10 +65,24 @@ public class ControllerProducto {
         } catch (Exception ex) {
             ex.printStackTrace();
 
-            return ResponseEntity.ok(CreateJSONResponse.createErrorResponse("Algo sucedió al consultar los tipos de producto", ex.getMessage()));
+            return ResponseEntity.ok(CreateJSONResponse.createErrorResponse("Algo sucedió al consultar los productos", ex.getMessage()));
         }
     }
 
+    @PutMapping(Config.EndpointResourcesPaths.Producto.UPDATE_PRODUCTO)
+    public ResponseEntity<Map<String, Object>> updateProducto(@RequestBody Producto producto) {
+        try {
+            serviceProducto.updateProducto(producto.getNombre(), producto.getClave(), producto.getCosto(), producto.getEstatus(), producto.getIdTipoProducto(), producto.getIdProducto());
+
+            producto.getProveedoresProducto().forEach(proveedorProducto -> serviceProveedorProducto.updateProveedorProducto(proveedorProducto.getClaveProveedor(), proveedorProducto.getCostoProveedor(), proveedorProducto.getIdProveedor(), proveedorProducto.getIdProveedorProducto()));
+
+            return ResponseEntity.ok(CreateJSONResponse.createOkResponse("Producto actualizado: ", true));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
+            return ResponseEntity.ok(CreateJSONResponse.createErrorResponse("Algo sucedió al actualizar el producto", ex.getMessage()));
+        }
+    }
 
     @DeleteMapping(Config.EndpointResourcesPaths.Producto.DELETE_PRODUCTO)
     public ResponseEntity<Map<String, Object>> deleteProductoById(@PathVariable int idProducto) {
@@ -79,4 +96,6 @@ public class ControllerProducto {
             return ResponseEntity.ok(CreateJSONResponse.createErrorResponse("Algo sucedió al eliminar el producto", ex.getMessage()));
         }
     }
+
+
 }

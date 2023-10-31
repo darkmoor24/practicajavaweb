@@ -43,6 +43,9 @@ public class Producto {
     @Column(name = "id_tipo_producto", nullable = false)
     private Integer idTipoProducto;
 
+    @Transient
+    private ArrayList<ProveedorProducto> proveedoresProducto;
+
 //    @ManyToOne
 //    @JoinColumn(name = "id_tipo_producto", referencedColumnName = "id_tipo_producto", nullable = false)
 //    private TipoProducto tipoProductoByIdTipoProducto;

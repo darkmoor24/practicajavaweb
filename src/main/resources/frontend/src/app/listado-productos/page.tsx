@@ -1,8 +1,8 @@
 'use client'
 
-import ListadoProductos from "@/views/ListadoProductos/ListadoProductos";
 import { NotificationContainer } from 'react-notifications';
 import React from "react";
+import ListadoProductos from '@/views/ListadoProductos/ListadoProductos';
 
 const Home = () => {
 	return (

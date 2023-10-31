@@ -6,9 +6,7 @@ public class Config {
     public static class EndpointPaths {
         public static final String API_PRODUCTO = API_URL + "/producto";
         public static final String API_PROVEEDOR = API_URL + "/proveedor";
-
         public static final String API_PROVEEDOR_PRODUCTO = API_URL + "/proveedor-producto";
-
         public static final String API_TIPO_PRODUCTO = API_URL + "/tipo-producto";
     }
 
@@ -16,15 +14,20 @@ public class Config {
         public static class Producto {
             public static final String ADD_PRODUCTO = "/add-producto";
             public static final String GET_PRODUCTOS = "/get-productos/{idTipoProducto}/{clave}";
+            public static final String UPDATE_PRODUCTO = "/update-producto";
             public static final String DELETE_PRODUCTO = "/delete-producto/{idProducto}";
         }
 
         public static class Proveedor {
-
+            // public static final String ADD_PROVEEDOR = "/add-proveedor";
+            public static final String GET_PROVEEDORES = "/get-proveedores";
         }
 
         public static class ProveedorProducto {
-
+            public static final String GET_PROVEEDORES_PRODUCTO = "/get-proveedores-producto/{idProducto}";
+            // public static final String ADD_PROVEEDORES_PRODUCTO = "/add-proveedores-producto";
+            // public static final String UPDATE_PROVEEDORES_PRODUCTO = "/update-proveedores-producto";
+            // public static final String DELETE_PROVEEDOR_PRODUCTO = "/delete-proveedor-producto/{idProveedorProducto}";
         }
 
         public static class TipoProducto {
