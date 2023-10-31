@@ -4,7 +4,7 @@ import { mySwal, ModalSweetAlert } from "@/utils/SweetAlerts/SweetAlert";
 import numberCommaSeparator from "@/utils/numberCommaSeparator/numberCommaSeparator";
 import { faAdd, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Alert, Box, FormControlLabel, IconButton, Switch, SwitchProps, Typography, styled } from "@mui/material";
+import { Alert, Box, FormControlLabel, IconButton, Modal, Switch, SwitchProps, Typography, styled } from "@mui/material";
 import { MRT_ColumnDef } from "material-react-table";
 import React, { useEffect, useMemo, useState } from "react";
 import { Button, Col, Container, FloatingLabel, Form, OverlayTrigger, Tooltip, Row } from "react-bootstrap";
@@ -58,8 +58,24 @@ const SwitchEstatus = styled((props: SwitchProps) => <Switch focusVisibleClassNa
 	},
 }));
 
+const style = {
+	position: "absolute" as "absolute",
+	top: "50%",
+	left: "50%",
+	transform: "translate(-50%, -50%)",
+	width: 400,
+	bgcolor: "background.paper",
+	border: "2px solid #000",
+	boxShadow: 24,
+	p: 4,
+};
+
 const FormularioAddUpdProducto = ({ formValues, setFormValues, tiposProducto, proveedores: proveedoresProducto }: IPropsAddUpdateProducto) => {
 	const [proveedores, setProveedores] = useState(proveedoresProducto);
+
+	const [showModal, setShowModal] = useState(false);
+
+	const [modalChildren, setModalChildren] = useState<React.JSX.Element>();
 
 	// const columnas: Array<MRT_ColumnDef<IProveedor>> = useMemo(
 	const columnas: Array<MRT_ColumnDef<any>> = useMemo(
@@ -100,6 +116,8 @@ const FormularioAddUpdProducto = ({ formValues, setFormValues, tiposProducto, pr
 	};
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		console.log(e.target);
+
 		const { name, value } = e.target;
 
 		setFormValues({
@@ -114,10 +132,10 @@ const FormularioAddUpdProducto = ({ formValues, setFormValues, tiposProducto, pr
 			idProveedorProducto: 0,
 			nombre: "",
 			claveProveedor: "",
-			costoProveedor: 0.0
+			costoProveedor: 0.0,
 		};
-		
-		if (id !== 'add') {
+
+		if (id !== "add") {
 			const aux = proveedores.find((proveedor: IProveedorProducto) => proveedor.idProveedorProducto === parseInt(id));
 
 			if (aux !== undefined) {
@@ -127,23 +145,33 @@ const FormularioAddUpdProducto = ({ formValues, setFormValues, tiposProducto, pr
 
 		const updateProveedoresList = (datosProveedorModificado: IProveedorProducto) => {
 			if (proveedores.length === 0) {
-				setProveedores([ ...proveedores, datosProveedorModificado ]);
+				setProveedores([...proveedores, datosProveedorModificado]);
 			} else {
 				const indexProductoExistente = proveedores.indexOf((proveedor: IProveedorProducto) => proveedor.idProveedorProducto === datosProveedorModificado.idProveedorProducto);
-				
+
 				console.log(indexProductoExistente);
 			}
 		};
 
-		await ModalSweetAlert({
-			title: "Agregar / Editar Proveedor",
-			html: id === 'add' ? <AgregarProveedor updateProveedoresList={updateProveedoresList} proveedor={proveedor} swalRef={mySwal} /> : <EditarProveedor updateProveedoresList={updateProveedoresList} proveedor={proveedor} swalRef={mySwal} />,
-			customClass: {
-				container: 'z-super-top'
-			},
-			showConfirmButton: false,
-			showCloseButton: true,
-		});
+		setModalChildren(
+			id === "add" ? (
+				<AgregarProveedor updateProveedoresList={updateProveedoresList} proveedor={proveedor} swalRef={mySwal} onClose={handleCloseModal} />
+			) : (
+				<EditarProveedor updateProveedoresList={updateProveedoresList} proveedor={proveedor} swalRef={mySwal} onClose={handleCloseModal} />
+			)
+		);
+
+		setShowModal(true);
+
+		// await ModalSweetAlert({
+		// 	title: "Agregar / Editar Proveedor",
+		// 	html: id === 'add' ? <AgregarProveedor updateProveedoresList={updateProveedoresList} proveedor={proveedor} swalRef={mySwal} /> : <EditarProveedor updateProveedoresList={updateProveedoresList} proveedor={proveedor} swalRef={mySwal} />,
+		// 	customClass: {
+		// 		container: 'z-super-top'
+		// 	},
+		// 	showConfirmButton: false,
+		// 	showCloseButton: true,
+		// });
 	};
 
 	const handleEliminarProveedor = async ({ currentTarget }: any) => {
@@ -158,11 +186,11 @@ const FormularioAddUpdProducto = ({ formValues, setFormValues, tiposProducto, pr
 			icon: "warning",
 			html: <EliminarProveedor eliminarProveedor={eliminarProveedor} swalRef={mySwal} />,
 			customClass: {
-				container: 'z-super-top'
+				container: "z-super-top",
 			},
 			showConfirmButton: false,
 			showCloseButton: false,
-		})
+		});
 	};
 
 	const renderTopToolbar = ({ table }: any) => {
@@ -170,7 +198,7 @@ const FormularioAddUpdProducto = ({ formValues, setFormValues, tiposProducto, pr
 			<Container fluid className="my-2">
 				<Row>
 					<Col align="right">
-						<Button id='add' variant="success" onClick={handleAgregarEditarProveedor} type="button">
+						<Button id="add" variant="success" onClick={handleAgregarEditarProveedor} type="button">
 							Agregar Proveedor <FontAwesomeIcon icon={faAdd} />
 						</Button>
 					</Col>
@@ -195,12 +223,16 @@ const FormularioAddUpdProducto = ({ formValues, setFormValues, tiposProducto, pr
 		</Box>
 	);
 
+	const handleCloseModal = () => {
+		setShowModal(false);
+	};
+
 	const { idProducto, nombre, clave, costo, estatus, idTipoProducto } = formValues;
 
 	return (
 		<Container fluid className="mb-5">
 			<Row className="mb-3 justify-content-end">
-				<Col xs={6} >
+				<Col xs={6}>
 					<Alert severity="info">Para guardar cualquier cambio, haga clic en el botón Guardar.</Alert>
 				</Col>
 			</Row>
@@ -275,6 +307,10 @@ const FormularioAddUpdProducto = ({ formValues, setFormValues, tiposProducto, pr
 					<DataTableRecipient columnas={columnas} data={proveedores} renderTopToolbar={renderTopToolbar} renderRowActions={renderRowActions} listaProveedores />
 				</Col>
 			</Row>
+
+			<Modal open={showModal} onClose={handleCloseModal} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+				<Box sx={style}>  {modalChildren} </Box>
+			</Modal>
 		</Container>
 	);
 };

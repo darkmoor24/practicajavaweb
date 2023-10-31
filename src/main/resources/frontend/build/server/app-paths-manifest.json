@@ -1,3 +1,6 @@
 {
-  "/listado-productos/page": "app/listado-productos/page.js"
+  "/not-found": "app/not-found.js",
+  "/page": "app/page.js",
+  "/listado-productos/page": "app/listado-productos/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js"
 }

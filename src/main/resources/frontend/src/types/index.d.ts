@@ -111,6 +111,7 @@ declare type IPropsAddUpdateProducto = {
 };
 
 declare type IPropsAddUpdateProveedorProducto = {
+	onClose: () => void;
 	updateProveedoresList: (datosProveedorModificado: IProveedorProducto) => void;
 	proveedor: IProveedorProducto;
 	swalRef: SweetAlert2 & ReactSweetAlert;

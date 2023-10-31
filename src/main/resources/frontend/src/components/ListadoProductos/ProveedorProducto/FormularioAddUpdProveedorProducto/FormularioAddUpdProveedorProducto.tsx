@@ -1,17 +1,19 @@
 import { IPropsAddUpdateProveedorProducto, IProveedor, IProveedorProducto } from "@/types";
 import { getProveedores } from "@/utils/httpRequests/httpRequestsProveedor/httpRequestsProveedor";
-import { faSave } from "@fortawesome/free-solid-svg-icons";
+import { faSave, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useMemo, useState, useEffect } from "react";
 import { Button, Col, Container, FloatingLabel, Form, Row } from "react-bootstrap";
 
-const FormularioAddUpdProveedorProducto = ({ updateProveedoresList, proveedor: proveedorProducto }: IPropsAddUpdateProveedorProducto) => {
+const FormularioAddUpdProveedorProducto = ({ onClose, updateProveedoresList, proveedor: proveedorProducto }: IPropsAddUpdateProveedorProducto) => {
 	const [formValues, setFormValues] = useState<IProveedorProducto>(proveedorProducto);
 
 	const [proveedores, setProveedores] = useState<Array<IProveedor>>([]);
 
 	const handleTipoProductoSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const { name, value } = e.target;
+
+		console.log(name, value);
 
 		if (name !== "" && (value !== "" || parseInt(value) !== 0)) {
 			setFormValues({
@@ -24,10 +26,25 @@ const FormularioAddUpdProveedorProducto = ({ updateProveedoresList, proveedor: p
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
 
-		setFormValues({
-			...formValues,
-			[name]: value,
-		});
+		console.log(name);
+
+		// Usa una función flecha para evitar la propagación de eventos
+		let valueAux = value;
+
+		const handleChange = (value: string) => {
+			setFormValues({
+				...formValues,
+				[name]: value,
+			});
+		};
+
+		if (name === "costo") {
+			valueAux = value.replace(/[^0-9]/g, "");
+		}
+
+		console.log(valueAux);
+
+		handleChange(valueAux);
 	};
 
 	useMemo(() => {
@@ -46,19 +63,23 @@ const FormularioAddUpdProveedorProducto = ({ updateProveedoresList, proveedor: p
 		return consultarProveedores();
 	}, []);
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
 
-        updateProveedoresList(formValues);
-    };
+		updateProveedoresList(formValues);
+	};
+
+	useEffect(() => {
+		console.log(proveedorProducto);
+	}, []);
 
 	return (
 		<Form onSubmit={handleSubmit}>
 			<Container fluid>
 				<Row>
 					<Col>
-						<FloatingLabel controlId="idTipoProducto" label="Tipo de Producto" className="mb-3">
-							<Form.Select value={proveedorProducto.idProveedor} name="idProveedorProducto" aria-label="Proveedores disponibles" onChange={handleTipoProductoSelection}>
+						<FloatingLabel controlId="idProveedorProducto" label="Tipo de Producto" className="mb-3">
+							<Form.Select value={formValues.idProveedor} name="idProveedorProducto" aria-label="Proveedores disponibles" onChange={handleTipoProductoSelection}>
 								<option value="">-- Elige una opción --</option>
 
 								{proveedores.map((proveedor: any, idx: number) => (
@@ -70,19 +91,22 @@ const FormularioAddUpdProveedorProducto = ({ updateProveedoresList, proveedor: p
 						</FloatingLabel>
 
 						<FloatingLabel controlId="claveProveedor" label="Clave de proveedor" className="mb-3">
-							<Form.Control type="text" placeholder="Clave de proveedor" value={proveedorProducto.claveProveedor} name="clave" onChange={handleInputChange} />
+							<Form.Control type="text" placeholder="Clave de proveedor" value={formValues.claveProveedor} name="claveProveedor" onChange={handleInputChange} />
 						</FloatingLabel>
 
 						<FloatingLabel controlId="costoProveedor" label="Costo de proveedor" className="mb-3">
-							<Form.Control type="text" placeholder="Costo de proveedor" value={proveedorProducto.costoProveedor} name="costo" onChange={handleInputChange} />
+							<Form.Control type="text" placeholder="Costo de proveedor" value={formValues.costoProveedor} name="costoProveedor" onChange={handleInputChange} />
 						</FloatingLabel>
 
-                        <div className="d-grid gap-2">
-                            <Button variant="success" type="submit" size="lg">
-                                Guardar <FontAwesomeIcon icon={faSave} />
-                            </Button>
-                        </div>
+						<div className="d-grid gap-2">
+							<Button variant="success" type="submit" size="lg">
+								Guardar <FontAwesomeIcon icon={faSave} />
+							</Button>
 
+							<Button variant="danger" type="button" size="lg" onClick={() => onClose()}>
+								Salir sin guardar <FontAwesomeIcon icon={faSignOutAlt} />
+							</Button>
+						</div>
 					</Col>
 				</Row>
 			</Container>

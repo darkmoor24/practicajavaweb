@@ -2,8 +2,8 @@ import { IPropsAddUpdateProveedorProducto } from "@/types";
 import React from "react";
 import FormularioAddUpdProveedorProducto from "../FormularioAddUpdProveedorProducto/FormularioAddUpdProveedorProducto";
 
-const AgregarProveedor = ({ updateProveedoresList, proveedor, swalRef }: IPropsAddUpdateProveedorProducto) => {
-	return <FormularioAddUpdProveedorProducto updateProveedoresList={updateProveedoresList} proveedor={proveedor} swalRef={swalRef} />;
+const AgregarProveedor = ({ onClose, updateProveedoresList, proveedor, swalRef }: IPropsAddUpdateProveedorProducto) => {
+	return <FormularioAddUpdProveedorProducto updateProveedoresList={updateProveedoresList} proveedor={proveedor} swalRef={swalRef} onClose={onClose} />;
 };
 
 export default AgregarProveedor;
