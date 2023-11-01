@@ -4,7 +4,7 @@ import { mySwal, ModalSweetAlert } from "@/utils/SweetAlerts/SweetAlert";
 import numberCommaSeparator from "@/utils/numberCommaSeparator/numberCommaSeparator";
 import { faAdd, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Alert, Box, FormControlLabel, IconButton, Modal, Switch, SwitchProps, Typography, styled } from "@mui/material";
+import { Alert, Box, Dialog, FormControlLabel, IconButton, Modal, Switch, SwitchProps, Typography, styled } from "@mui/material";
 import { MRT_ColumnDef } from "material-react-table";
 import React, { useEffect, useMemo, useState } from "react";
 import { Button, Col, Container, FloatingLabel, Form, OverlayTrigger, Tooltip, Row } from "react-bootstrap";
@@ -58,7 +58,7 @@ const SwitchEstatus = styled((props: SwitchProps) => <Switch focusVisibleClassNa
 	},
 }));
 
-const style = {
+const modalStyle = {
 	position: "absolute" as "absolute",
 	top: "50%",
 	left: "50%",
@@ -67,17 +67,18 @@ const style = {
 	bgcolor: "background.paper",
 	border: "2px solid #000",
 	boxShadow: 24,
-	p: 4,
+	p: 1,
 };
 
 const FormularioAddUpdProducto = ({ formValues, setFormValues, tiposProducto, proveedores: proveedoresProducto }: IPropsAddUpdateProducto) => {
-	const [proveedores, setProveedores] = useState(proveedoresProducto);
+	const { idProducto, nombre, clave, costo, estatus, idTipoProducto } = formValues;
+
+	const [proveedores, setProveedores] = useState<any>([]);
 
 	const [showModal, setShowModal] = useState(false);
 
 	const [modalChildren, setModalChildren] = useState<React.JSX.Element>();
-
-	// const columnas: Array<MRT_ColumnDef<IProveedor>> = useMemo(
+	
 	const columnas: Array<MRT_ColumnDef<any>> = useMemo(
 		() => [
 			{
@@ -116,18 +117,27 @@ const FormularioAddUpdProducto = ({ formValues, setFormValues, tiposProducto, pr
 	};
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		console.log(e.target);
-
 		const { name, value } = e.target;
 
-		setFormValues({
-			...formValues,
-			[name]: value,
-		});
+		let valueAux: string | number = value;
+
+		const handleChange = (newValue: string | number) => {
+			setFormValues({
+				...formValues,
+				[name]: newValue,
+			});
+		};
+
+		if (name === "costo") {
+			valueAux = value.replace(/[^0-9.]/g, "");
+		}
+
+		handleChange(valueAux);
 	};
 
 	const handleAgregarEditarProveedor = async ({ currentTarget: { id } }: React.MouseEvent<HTMLElement>) => {
 		let proveedor: IProveedorProducto = {
+			idProducto: 0,
 			idProveedor: 0,
 			idProveedorProducto: 0,
 			nombre: "",
@@ -138,19 +148,29 @@ const FormularioAddUpdProducto = ({ formValues, setFormValues, tiposProducto, pr
 		if (id !== "add") {
 			const aux = proveedores.find((proveedor: IProveedorProducto) => proveedor.idProveedorProducto === parseInt(id));
 
+			console.log(aux);
+
 			if (aux !== undefined) {
 				proveedor = aux;
 			}
 		}
 
-		const updateProveedoresList = (datosProveedorModificado: IProveedorProducto) => {
-			if (proveedores.length === 0) {
-				setProveedores([...proveedores, datosProveedorModificado]);
-			} else {
-				const indexProductoExistente = proveedores.indexOf((proveedor: IProveedorProducto) => proveedor.idProveedorProducto === datosProveedorModificado.idProveedorProducto);
+		const updateProveedoresList = (proveedorModificado: IProveedorProducto) => {
+			const proveedorExistente = proveedores.find((proveedor: IProveedorProducto) => proveedor.idProveedorProducto === proveedorModificado.idProveedorProducto);
 
-				console.log(indexProductoExistente);
+			if (proveedorExistente === undefined) {
+				setProveedores([...proveedores, proveedorModificado]);
+
+				return setShowModal(false);
 			}
+
+			const indexProveedorExistente = proveedores.indexOf(proveedorExistente);
+
+			proveedores[indexProveedorExistente] = proveedorModificado;
+
+			setProveedores([...proveedores]);
+
+			setShowModal(false);
 		};
 
 		setModalChildren(
@@ -162,16 +182,6 @@ const FormularioAddUpdProducto = ({ formValues, setFormValues, tiposProducto, pr
 		);
 
 		setShowModal(true);
-
-		// await ModalSweetAlert({
-		// 	title: "Agregar / Editar Proveedor",
-		// 	html: id === 'add' ? <AgregarProveedor updateProveedoresList={updateProveedoresList} proveedor={proveedor} swalRef={mySwal} /> : <EditarProveedor updateProveedoresList={updateProveedoresList} proveedor={proveedor} swalRef={mySwal} />,
-		// 	customClass: {
-		// 		container: 'z-super-top'
-		// 	},
-		// 	showConfirmButton: false,
-		// 	showCloseButton: true,
-		// });
 	};
 
 	const handleEliminarProveedor = async ({ currentTarget }: any) => {
@@ -227,7 +237,18 @@ const FormularioAddUpdProducto = ({ formValues, setFormValues, tiposProducto, pr
 		setShowModal(false);
 	};
 
-	const { idProducto, nombre, clave, costo, estatus, idTipoProducto } = formValues;
+	useEffect(() => {
+		if (proveedores.length === 0) {
+			setProveedores(proveedoresProducto);
+		}
+	}, []);
+
+	useEffect(() => {
+		setFormValues({
+			...formValues,
+			proveedoresProducto: proveedores,
+		});
+	}, [proveedores]);
 
 	return (
 		<Container fluid className="mb-5">
@@ -245,13 +266,13 @@ const FormularioAddUpdProducto = ({ formValues, setFormValues, tiposProducto, pr
 			<Row>
 				<Col>
 					<FloatingLabel controlId="nombre" label="Nombre de producto" className="mb-3">
-						<Form.Control type="text" placeholder="Nombre de producto" value={nombre} name="nombre" onChange={handleInputChange} />
+						<Form.Control type="text" placeholder="Nombre de producto" value={nombre} name="nombre" onChange={handleInputChange} required/>
 					</FloatingLabel>
 				</Col>
 
 				<Col>
 					<FloatingLabel controlId="clave" label="Clave de producto" className="mb-3">
-						<Form.Control type="text" placeholder="Clave de producto" value={clave} name="clave" onChange={handleInputChange} />
+						<Form.Control type="text" placeholder="Clave de producto" value={clave} name="clave" onChange={handleInputChange} required/>
 					</FloatingLabel>
 				</Col>
 			</Row>
@@ -273,7 +294,7 @@ const FormularioAddUpdProducto = ({ formValues, setFormValues, tiposProducto, pr
 
 				<Col>
 					<FloatingLabel controlId="costo" label="Costo de producto" className="mb-3">
-						<Form.Control type="text" placeholder="Costo de producto" value={costo} name="costo" onChange={handleInputChange} />
+						<Form.Control type="text" placeholder="Costo de producto" value={costo} name="costo" onChange={handleInputChange} required />
 					</FloatingLabel>
 				</Col>
 			</Row>
@@ -309,8 +330,11 @@ const FormularioAddUpdProducto = ({ formValues, setFormValues, tiposProducto, pr
 			</Row>
 
 			<Modal open={showModal} onClose={handleCloseModal} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-				<Box sx={style}>  {modalChildren} </Box>
+				<Box sx={modalStyle}> {modalChildren} </Box>
 			</Modal>
+			{/* <Dialog className="z-super-top" open={showModal} onClose={handleCloseModal} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+				<Box sx={modalStyle}>  {modalChildren} </Box>
+			</Dialog> */}
 		</Container>
 	);
 };

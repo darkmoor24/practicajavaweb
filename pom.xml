@@ -111,7 +111,8 @@
                         </goals>
 
                         <configuration>
-                            <arguments>run compile-react-app</arguments>
+                            <!-- <arguments>run compile-react-app</arguments> -->
+                            <arguments>run build</arguments>
                         </configuration>
                     </execution>
                 </executions>

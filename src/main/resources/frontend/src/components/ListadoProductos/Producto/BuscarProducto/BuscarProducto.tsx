@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useEffect, useLayoutEffect, useState } from "react";
-import { createTheme, ThemeProvider } from "@mui/material";
+import { createTheme, ThemeProvider, Typography } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
-
 
 import { Button, Col, Container, Row } from "react-bootstrap";
 import FormularioBusqueda from "./FormularioBusqueda/FormularioBusqueda";
@@ -12,7 +11,7 @@ import { ModalSweetAlert } from "@/utils/SweetAlerts/SweetAlert";
 import EliminarProducto from "../EliminarProducto/EliminarProducto";
 import { getProductos } from "@/utils/httpRequests/httpRequestsProducto/httpRequestsProducto";
 import { FuncionesCRUD, IProducto } from "@/types";
-import FullScreenDialog from "@/components/FullScreenDialog/FullScreenDialog";
+import FullScreenDialogAgregarEditarProducto from "@/components/FullScreenDialogAgregarEditarProducto/FullScreenDialogAgregarEditarProducto";
 import { getProveedoresProducto } from "@/utils/httpRequests/httpRequestsProveedorProducto/httpRequestsProveedorProducto";
 
 const BuscarProducto = () => {
@@ -31,15 +30,13 @@ const BuscarProducto = () => {
 		clave: "",
 		costo: 0.0,
 		estatus: 0,
-		idTipoProducto: 0,
-		proveedores: []
+		idTipoProducto: criteriosBusqueda.idTipoProducto,
+		proveedoresProducto: [],
 	};
 
 	const [productoToAddOrUpdate, setProductoToAddOrUpdate] = useState<IProducto>(productoInitialState);
 
-	const [productoAgregado, setProductoAgregado] = useState(false);
-
-	const [productoEditado, setProductoEditado] = useState(false);
+	const [productoAgregadoOEditado, setProductoAgregadoOEditado] = useState(false);
 
 	const [productoEliminado, setProductoEliminado] = useState(false);
 
@@ -52,24 +49,23 @@ const BuscarProducto = () => {
 	};
 
 	const handleEditarProducto = async ({ currentTarget }: any) => {
-
 		try {
 			const idProducto = parseInt(currentTarget.id);
 
 			const { data: proveedores } = await getProveedoresProducto(idProducto);
 
 			let producto = productoInitialState;
-			
+
 			const aux = productos?.find((producto: IProducto) => producto?.idProducto === idProducto);
 
 			if (aux !== undefined) {
 				producto = {
 					...aux,
-					proveedores
+					proveedoresProducto: proveedores,
 				};
-		
+
 				setProductoToAddOrUpdate(producto || productoToAddOrUpdate);
-		
+
 				setShowFullScreenDialog(true);
 			}
 		} catch (error) {
@@ -98,16 +94,14 @@ const BuscarProducto = () => {
 	};
 
 	useEffect(() => {
-		if (productoAgregado || productoEditado || productoEliminado) {
+		if (productoAgregadoOEditado || productoEliminado) {
 			const refetchProductos = async () => {
 				try {
 					const { data: productos } = await getProductos(criteriosBusqueda.idTipoProducto, criteriosBusqueda.clave);
 
 					setProductos(productos);
 
-					setProductoAgregado(false);
-
-					setProductoEditado(false);
+					setProductoAgregadoOEditado(false);
 
 					setProductoEliminado(false);
 				} catch (error) {
@@ -117,8 +111,7 @@ const BuscarProducto = () => {
 
 			refetchProductos();
 		}
-	}, [productoAgregado, productoEditado, productoEliminado]);
-	
+	}, [productoAgregadoOEditado, productoEliminado]);
 
 	useEffect(() => {
 		if (!showFullScreenDialog) {
@@ -128,7 +121,7 @@ const BuscarProducto = () => {
 
 	const getTheme: any = () => window.document.querySelector("html")?.getAttribute("data-bs-theme");
 
-    const [theme, setTheme] = useState(
+	const [theme, setTheme] = useState(
 		createTheme({
 			palette: {
 				mode: getTheme(),
@@ -136,7 +129,7 @@ const BuscarProducto = () => {
 		})
 	);
 
-    useLayoutEffect(() => {
+	useLayoutEffect(() => {
 		const element = document.querySelector("html");
 
 		element?.addEventListener("change", (event) => {
@@ -151,11 +144,16 @@ const BuscarProducto = () => {
 	}, []);
 
 	return (
-		<Container fluid className="vh-100">
+		<Container fluid className="h-100">
 			<Row className="mt-3">
 				<Col>
-					<span>Buscar Producto</span>
+					<Typography variant="h6">Buscar Producto</Typography>
+
 					<hr />
+
+					<Typography variant="subtitle1" className="my-3 ms-3">
+						Puedes buscar productos por Tipo, o por Tipo y Clave
+					</Typography>
 
 					<FormularioBusqueda criteriosBusqueda={criteriosBusqueda} setCriteriosBusqueda={setCriteriosBusqueda} setProductos={setProductos} setShowTable={setShowTable} />
 
@@ -164,18 +162,23 @@ const BuscarProducto = () => {
 
 						{showTable && (
 							<>
-								<hr className="mb-3" />
+								<hr />
+
+								<Typography className="mb-4" variant="h6">Producto(s) encontrados</Typography>
+
 								<ResultadosBusqueda productos={productos} funcionesCRUD={funcionesCRUD} />
 							</>
 						)}
 
-						{
-							showFullScreenDialog &&
-							<FullScreenDialog open={showFullScreenDialog} setOpen={setShowFullScreenDialog} producto={productoToAddOrUpdate} />
-						}
-
+						{showFullScreenDialog && (
+							<FullScreenDialogAgregarEditarProducto
+								open={showFullScreenDialog}
+								setOpen={setShowFullScreenDialog}
+								producto={productoToAddOrUpdate}
+								setProductoAgregadoOEditado={setProductoAgregadoOEditado}
+							/>
+						)}
 					</ThemeProvider>
-
 				</Col>
 			</Row>
 		</Container>

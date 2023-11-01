@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Button, Col, Container, Row, Form, FloatingLabel } from "react-bootstrap";
 import { getTiposProducto } from "@/utils/httpRequests/httpRequestsTipoProducto/httpRequestsTipoProducto";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IPropsFormularioBusqueda } from "@/types";
 import { getProductos } from "@/utils/httpRequests/httpRequestsProducto/httpRequestsProducto";
 import { NotificationManager } from "react-notifications";
+import { NotificacionSweetAlert } from "@/utils/SweetAlerts/SweetAlert";
 
 const FormularioBusqueda = ({ criteriosBusqueda, setCriteriosBusqueda, setProductos, setShowTable }: IPropsFormularioBusqueda) => {
 	const [tiposProducto, setTiposProducto] = useState([]);
@@ -26,10 +27,10 @@ const FormularioBusqueda = ({ criteriosBusqueda, setCriteriosBusqueda, setProduc
 
 			if (productos.length < 1) {
 				return NotificationManager.error(message);
-			} 
-			
-			NotificationManager.success(`${productos.length} Productos encontrados`);
-			
+			}
+
+			NotificacionSweetAlert("success", `${productos.length} Productos encontrados`);
+
 			setProductos(productos);
 
 			setShowTable(true);
@@ -52,7 +53,7 @@ const FormularioBusqueda = ({ criteriosBusqueda, setCriteriosBusqueda, setProduc
 
 		setCriteriosBusqueda({
 			...criteriosBusqueda,
-			[name]: value,
+			[name]: value === "" ? "null" : value,
 		});
 	};
 
@@ -61,7 +62,7 @@ const FormularioBusqueda = ({ criteriosBusqueda, setCriteriosBusqueda, setProduc
 			try {
 				if (tiposProducto.length === 0) {
 					const { data: tiposProducto } = await getTiposProducto();
-	
+
 					setTiposProducto(tiposProducto);
 				}
 			} catch (error) {
@@ -76,8 +77,7 @@ const FormularioBusqueda = ({ criteriosBusqueda, setCriteriosBusqueda, setProduc
 		<Form onSubmit={handleSubmit}>
 			<Container fluid>
 				<Row>
-					<Col>
-
+					<Col xs={5}>
 						<FloatingLabel controlId="idTipoProducto" label="Tipo de Producto">
 							<Form.Select name="idTipoProducto" aria-label="Tipo de Producto" onChange={handleTipoProductoSelection}>
 								<option value="">-- Elige una opción --</option>
@@ -91,18 +91,18 @@ const FormularioBusqueda = ({ criteriosBusqueda, setCriteriosBusqueda, setProduc
 						</FloatingLabel>
 					</Col>
 
-					<Col>
+					<Col xs={5}>
 						<FloatingLabel controlId="clave" label="Clave de Producto">
 							<Form.Control name="clave" type="text" placeholder="Clave de Producto" onChange={handleClaveProducto} />
 						</FloatingLabel>
 					</Col>
-				</Row>
 
-				<Row className="mt-2">
-					<Col align="right">
-						<Button variant="primary" type="submit">
-							Buscar <FontAwesomeIcon icon={faSearch} />
-						</Button>
+					<Col align="right" xs={2}>
+						<div className="d-grid gap-2 h-100">
+							<Button variant="primary" type="submit" size="lg">
+								Buscar <FontAwesomeIcon icon={faSearch} />
+							</Button>
+						</div>
 					</Col>
 				</Row>
 			</Container>

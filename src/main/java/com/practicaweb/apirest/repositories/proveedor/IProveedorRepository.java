@@ -13,6 +13,6 @@ import java.util.ArrayList;
 @Repository
 public interface IProveedorRepository extends JpaRepository<Proveedor, Integer> {
 
-    @Query(value = "{ CALL spObtenerProveedores() }", nativeQuery = true)
+    @Query(value = "{ CALL spGetProveedores() }", nativeQuery = true)
     ArrayList<Proveedor> getProveedores();
 }

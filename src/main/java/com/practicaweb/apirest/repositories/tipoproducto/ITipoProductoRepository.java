@@ -12,6 +12,6 @@ import java.util.ArrayList;
 @Repository
 public interface ITipoProductoRepository extends JpaRepository<TipoProducto, Integer> {
 
-    @Query(value = "{ CALL spObtenerTiposProductos() }", nativeQuery = true)
+    @Query(value = "{ CALL spGetTiposProductos() }", nativeQuery = true)
     ArrayList<TipoProducto> getTiposProductos();
 }

@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./globals.css";
 import 'animate.css';
 import 'react-notifications/lib/notifications.css';
-import '@sweetalert2/theme-dark/dark.css';
+import '@sweetalert2/theme-dark/dark.min.css';
 
 const inter = Inter({ subsets: ["latin"] });
 

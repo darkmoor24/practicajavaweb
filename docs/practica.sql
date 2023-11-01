@@ -62,7 +62,7 @@ SELECT * FROM proveedor;
 /* CREATE SENTENCES */
 -- Agregar nuevo producto
 DELIMITER $$
-CREATE PROCEDURE spAgregarProducto(
+CREATE PROCEDURE spAddProducto(
 	IN v_nombre				VARCHAR(90),
     IN v_clave				VARCHAR(30),
     IN v_costo				DOUBLE,
@@ -76,7 +76,7 @@ DELIMITER ;
 
 -- Agregar nuevo proveedor producto
 DELIMITER $$
-CREATE PROCEDURE spAgregarNuevoProveedorProducto(
+CREATE PROCEDURE spAddNuevoProveedorProducto(
 	IN v_clave_proveedor		VARCHAR(30),
     IN v_costo_proveedor		DOUBLE,
     IN v_id_proveedor		    INT,
@@ -90,7 +90,7 @@ DELIMITER ;
 /* READ SENTENCES */
 -- Listar tipos de producto
 DELIMITER $$
-CREATE PROCEDURE spObtenerTiposProductos ()
+CREATE PROCEDURE spGetTiposProductos ()
 	BEGIN
 		SELECT * FROM viewObtenerTiposProductos;
     END $$
@@ -98,7 +98,7 @@ DELIMITER ;
 
 -- Listar tipos de producto
 DELIMITER $$
-CREATE PROCEDURE spObtenerProveedores ()
+CREATE PROCEDURE spGetProveedores ()
 	BEGIN
 		SELECT * FROM viewObtenerProveedores;
     END $$
@@ -106,7 +106,7 @@ DELIMITER ;
 
 -- Listar productos por tipo producto y clave (coincidencias de clave)
 DELIMITER $$
-CREATE PROCEDURE spObtenerProductos (
+CREATE PROCEDURE spGetProductos (
 	IN v_id_tipo_producto	INT,
     IN v_clave			    VARCHAR(30)
 )            
@@ -121,14 +121,14 @@ DELIMITER ;
 
 -- Obtener producto por clave (campo unique)
 DELIMITER $$
-CREATE PROCEDURE spObtenerProductoByClave (IN v_clave VARCHAR(30))            
+CREATE PROCEDURE spGetProductoByClave (IN v_clave VARCHAR(30))            
 	BEGIN
 		SELECT p.id_producto, p.nombre, p.clave, p.costo, p.estatus, p.id_tipo_producto FROM viewObtenerProductos p WHERE p.clave = v_clave;
     END $$              
 DELIMITER ;
 
 DELIMITER $$
-CREATE PROCEDURE spObtenerProveedoresProducto (IN v_id_producto INT)
+CREATE PROCEDURE spGetProveedoresProducto (IN v_id_producto INT)
 	BEGIN
 		SELECT pp.id_producto, pp.id_proveedor, pp.id_proveedor_producto, pp.nombre, pp.clave_proveedor, pp.costo_proveedor FROM viewObtenerProveedoresProducto pp WHERE pp.id_producto = v_id_producto;
     END $$  
@@ -137,7 +137,7 @@ DELIMITER ;
 /* UPDATE SENTENCES */
 -- Actualizar producto
 DELIMITER $$ 
-CREATE PROCEDURE spActualizarProducto (
+CREATE PROCEDURE spUpdateProducto (
 	IN v_nombre				VARCHAR(30),
 	IN v_clave				VARCHAR(30),
     IN v_costo				DOUBLE,
@@ -152,7 +152,7 @@ DELIMITER ;
 
 -- Actualizar proveedor producto
 DELIMITER $$
-CREATE PROCEDURE spActualizarProveedorProducto(
+CREATE PROCEDURE spUpdateProveedorProducto(
 	IN v_clave_proveedor 		VARCHAR(30),
     IN v_costo_proveedor		DOUBLE,
     IN v_id_proveedor			INT,
@@ -167,7 +167,7 @@ DELIMITER ;
 /* DELETE SENTENCES (Bajas físicas)*/
 -- Eliminar producto: Elimina los proveedores y el producto
 DELIMITER $$
-CREATE PROCEDURE spEliminarProducto(IN v_id_producto INT)
+CREATE PROCEDURE deleteProductoById(IN v_id_producto INT)
 	BEGIN 
 		DELETE FROM proveedor_producto WHERE id_producto = v_id_producto;
         
@@ -177,7 +177,7 @@ DELIMITER ;
 
 -- Eliminar proveedor producto
 DELIMITER $$
-CREATE PROCEDURE spEliminarProveedorProducto(IN v_id_proveedor_producto INT)
+CREATE PROCEDURE spDeleteProveedorProducto(IN v_id_proveedor_producto INT)
 	BEGIN   
 		DELETE FROM proveedor_producto WHERE id_proveedor_producto = v_id_proveedor_producto;
     END $$  
@@ -200,7 +200,7 @@ INSERT INTO proveedor (nombre, descripcion) VALUES
 ("Clothing Co.", "Ropa de caballero");
 
 # Datos de prueba
-CALL spAgregarProducto('Pinol 350ml', 'PINOL350', 25.5, 1);
-CALL spAgregarNuevoProveedorProducto('ML-350-PINO', 22.6, 1, 1);
-CALL spAgregarNuevoProveedorProducto('PINOML-350', 22.1, 2, 1);
-CALL spAgregarNuevoProveedorProducto('ML-350-PINO', 22.6, 3, 1);
+CALL spAddProducto('Pinol 350ml', 'PINOL350', 25.5, 1);
+CALL spAddNuevoProveedorProducto('ML-350-PINO', 22.6, 1, 1);
+CALL spAddNuevoProveedorProducto('PINOML-350', 22.1, 2, 1);
+CALL spAddNuevoProveedorProducto('ML-350-PINO', 22.6, 3, 1);

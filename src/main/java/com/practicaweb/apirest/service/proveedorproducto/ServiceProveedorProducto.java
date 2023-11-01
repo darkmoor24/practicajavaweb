@@ -41,4 +41,12 @@ public class ServiceProveedorProducto {
             ex.printStackTrace();
         }
     }
+
+    public void deleteProveedorProductoById(int idProveedorProducto) {
+        try {
+            iProveedorProductoRepository.deleteProveedorProductoById(idProveedorProducto);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 }

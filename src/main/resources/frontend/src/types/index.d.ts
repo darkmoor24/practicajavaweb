@@ -53,11 +53,12 @@ interface IProducto {
 	idProducto: number;
 	idTipoProducto: number;
 	estatus: number;
-	proveedores: Array<IProveedorProducto> | [];
+	proveedoresProducto: Array<IProveedorProducto> | [];
 }
 
 interface IProveedorProducto {
-    idProveedor: string | number | readonly string[] | undefined;
+    idProducto: number;
+	idProveedor: number;
 	idProveedorProducto: number;
 	nombre: string;
 	claveProveedor: string;
@@ -96,10 +97,11 @@ declare type IPropsEliminarProveedor = {
 	swalRef: SweetAlert2 & ReactSweetAlert;
 };
 
-declare type IPropsFullScreenDialog = {
+declare type IPropsFullScreenDialogAgregarEditarProducto = {
 	open: boolean;
 	setOpen: (open: boolean) => void;
 	producto: IProducto;
+	setProductoAgregadoOEditado: (productoAgregadoOEditado: boolean) => void;
 };
 
 declare type IPropsAddUpdateProducto = {

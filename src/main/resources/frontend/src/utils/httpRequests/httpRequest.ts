@@ -21,10 +21,8 @@ const httpRequest: Function = ({ url, method = "GET", body = undefined }: Custom
 				},
 			};
 
-			if (method === "POST") {
-				if (body !== undefined) {
-					options.body = body;
-				}
+			if (body !== undefined) {
+				options.body = body;
 			}
 
 			const request = await fetch(`${BASE_API_URL}/${url}`, options);

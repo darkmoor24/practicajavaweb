@@ -7,10 +7,11 @@ const Toast = Swal.mixin({
 	toast: true,
 	position: "bottom-end",
 	showConfirmButton: false,
-	timer: 1500,
+	// timer: 3500,
 	timerProgressBar: true,
 	customClass: {
-		popup: "notificacion",
+		container: "z-super-top",
+		popup: "z-super-top",
 	},
 	didOpen: (toast) => {
 		toast.addEventListener("mouseenter", Swal.stopTimer);
@@ -18,8 +19,9 @@ const Toast = Swal.mixin({
 	},
 });
 
-export const NotificacionSweetAlert = (icon: any, title: any) => {
+export const NotificacionSweetAlert = (icon: any, title: any, timer = 2000) => {
 	Toast.fire({
+		timer,
 		icon,
 		title,
 	});

@@ -7,9 +7,12 @@ import com.practicaweb.apirest.service.proveedorproducto.ServiceProveedorProduct
 import com.practicaweb.apirest.utils.Config;
 import com.practicaweb.apirest.utils.CreateJSONResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.embedded.netty.NettyWebServer;
 import org.springframework.http.ResponseEntity;
+import org.springframework.orm.hibernate5.HibernateJdbcException;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.*;
 
 @RestController
@@ -27,20 +30,25 @@ public class ControllerProducto {
         try {
             serviceProducto.addProducto(producto.getNombre(), producto.getClave(), producto.getCosto(), producto.getIdTipoProducto());
 
-            producto.getProveedoresProducto().forEach(proveedorProducto -> serviceProveedorProducto.addProveedorProducto(proveedorProducto.getClaveProveedor(), proveedorProducto.getCostoProveedor(), proveedorProducto.getIdProveedor(), serviceProducto.getProductoByClave(producto.getClave()).getIdProducto()));
+            ArrayList<ProveedorProducto> proveedoresProducto = producto.getProveedoresProducto();
+
+            if (!proveedoresProducto.isEmpty()) {
+                proveedoresProducto.forEach(proveedorProducto -> serviceProveedorProducto.addProveedorProducto(proveedorProducto.getClaveProveedor(), proveedorProducto.getCostoProveedor(), proveedorProducto.getIdProveedor(), serviceProducto.getProductoByClave(producto.getClave()).getIdProducto()));
+            }
 
             return ResponseEntity.ok(CreateJSONResponse.createOkResponse("Producto agregado", true));
         } catch (Exception ex) {
             ex.printStackTrace();
 
+            if (ex.getMessage().contains("Duplicate entry") && ex.getMessage().contains("producto.clave")) {
+                return ResponseEntity.ok(CreateJSONResponse.createErrorResponse("Ya existe un producto con esta clave, intenta otra", "duplicate_entry"));
+            }
+
             return ResponseEntity.ok(CreateJSONResponse.createErrorResponse("Algo sucedió al agregar el producto", ex.getMessage()));
         }
     }
 
-    /**
-     * POST utilizado para método GET para proteger data ingresada
-     * */
-    @PostMapping(Config.EndpointResourcesPaths.Producto.GET_PRODUCTOS)
+    @GetMapping(Config.EndpointResourcesPaths.Producto.GET_PRODUCTOS)
     public ResponseEntity<Map<String, Object>> getProductos(@PathVariable int idTipoProducto, @PathVariable(required = false) String clave) {
 
         byte[] decodedBytes = Base64.getDecoder().decode(clave);
@@ -74,11 +82,24 @@ public class ControllerProducto {
         try {
             serviceProducto.updateProducto(producto.getNombre(), producto.getClave(), producto.getCosto(), producto.getEstatus(), producto.getIdTipoProducto(), producto.getIdProducto());
 
-            producto.getProveedoresProducto().forEach(proveedorProducto -> serviceProveedorProducto.updateProveedorProducto(proveedorProducto.getClaveProveedor(), proveedorProducto.getCostoProveedor(), proveedorProducto.getIdProveedor(), proveedorProducto.getIdProveedorProducto()));
+            ArrayList<ProveedorProducto> proveedoresProductoExistentes = serviceProveedorProducto.getProveedoresProducto(producto.getIdProducto());
+            ArrayList<ProveedorProducto> nuevosProveedoresProducto = producto.getProveedoresProducto();
 
-            return ResponseEntity.ok(CreateJSONResponse.createOkResponse("Producto actualizado: ", true));
+            ArrayList<ProveedorProducto> proveedoresProductoNuevos = getProveedoresProductoNuevos(nuevosProveedoresProducto);
+            ArrayList<ProveedorProducto> proveedoresProductoModificados = getProveedoresProductoModificados(nuevosProveedoresProducto);
+            ArrayList<Integer> proveedoresProductoEliminados = getProveedoresProductoEliminados(proveedoresProductoExistentes, nuevosProveedoresProducto);
+
+            proveedoresProductoNuevos.forEach(proveedorProducto -> serviceProveedorProducto.addProveedorProducto(proveedorProducto.getClaveProveedor(), proveedorProducto.getCostoProveedor(), proveedorProducto.getIdProveedor(), producto.getIdProducto()));
+            proveedoresProductoModificados.forEach(proveedorProducto -> serviceProveedorProducto.updateProveedorProducto(proveedorProducto.getClaveProveedor(), proveedorProducto.getCostoProveedor(), proveedorProducto.getIdProveedor(), proveedorProducto.getIdProveedorProducto()));
+            proveedoresProductoEliminados.forEach(idProveedorProducto -> serviceProveedorProducto.deleteProveedorProductoById(idProveedorProducto));
+
+            return ResponseEntity.ok(CreateJSONResponse.createOkResponse("Producto actualizado", true));
         } catch (Exception ex) {
             ex.printStackTrace();
+
+            if (ex.getMessage().contains("Duplicate entry") && ex.getMessage().contains("producto.clave")) {
+                return ResponseEntity.ok(CreateJSONResponse.createErrorResponse("Ya existe un producto con esta clave, intenta otra", "duplicate_entry"));
+            }
 
             return ResponseEntity.ok(CreateJSONResponse.createErrorResponse("Algo sucedió al actualizar el producto", ex.getMessage()));
         }
@@ -98,4 +119,43 @@ public class ControllerProducto {
     }
 
 
+    private static ArrayList<ProveedorProducto> getProveedoresProductoNuevos (ArrayList<ProveedorProducto> nuevosProveedoresProducto) {
+        ArrayList<ProveedorProducto> proveedoresProductoNuevos = new ArrayList<>();
+
+        for (ProveedorProducto nuevoProveedor : nuevosProveedoresProducto) {
+            if (nuevoProveedor.getIdProveedorProducto() == 0) proveedoresProductoNuevos.add(nuevoProveedor);
+        }
+
+        return proveedoresProductoNuevos;
+    }
+
+    private static ArrayList<ProveedorProducto> getProveedoresProductoModificados (ArrayList<ProveedorProducto> nuevosProveedoresProducto) {
+        ArrayList<ProveedorProducto> proveedoresProductoModificados= new ArrayList<>();
+
+        for (ProveedorProducto nuevoProveedor : nuevosProveedoresProducto) {
+            if (nuevoProveedor.getIdProveedorProducto() != 0) proveedoresProductoModificados.add(nuevoProveedor);
+        }
+
+        return proveedoresProductoModificados;
+    }
+
+    private static ArrayList<Integer> getProveedoresProductoEliminados (ArrayList<ProveedorProducto> proveedoresProductoExistentes, ArrayList<ProveedorProducto> nuevosProveedoresProducto) {
+        ArrayList<Integer> proveedoresProductoEliminados = new ArrayList<>();
+
+        for (ProveedorProducto existente : proveedoresProductoExistentes) {
+            boolean encontrado = false;
+            for (ProveedorProducto nuevoProveedor : nuevosProveedoresProducto) {
+                if (Objects.equals(nuevoProveedor.getIdProveedorProducto(), existente.getIdProveedorProducto())) {
+                    encontrado = true;
+                    break;
+                }
+            }
+
+            if (!encontrado) {
+                proveedoresProductoEliminados.add(existente.getIdProveedorProducto());
+            }
+        }
+
+        return proveedoresProductoEliminados;
+    }
 }

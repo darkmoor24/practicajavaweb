@@ -4,15 +4,7 @@ import FormularioAddUpdProducto from "../FormularioAddUpdProducto/FormularioAddU
 
 const EditarProducto = ({ formValues, setFormValues, tiposProducto, callback: guardarProducto }: IPropsAddUpdateProducto) => {
 
-    const [proveedores, setProveedores] = useState(formValues.proveedores);
-
-    useEffect(() => {
-        console.log("Proveedores modificados: ", proveedores);
-        //* Si se agrega uno, le ponemos new
-        //! Si se elimina uno, le ponemos delete
-
-
-    }, [proveedores]);
+    const [proveedores, setProveedores] = useState(formValues.proveedoresProducto);
 
     return <FormularioAddUpdProducto formValues={formValues} setFormValues={setFormValues} tiposProducto={tiposProducto} proveedores={proveedores} />
 };

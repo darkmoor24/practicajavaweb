@@ -43,21 +43,20 @@
 	}
 }
 
-
 .Mui-TableHeadCell-Content {
-	justify-content: center!important;
+	justify-content: center !important;
 }
 
 .MuiTableCell-root {
-	text-align: center!important;
+	text-align: center !important;
 }
 
 .css-1qmwz0i-MuiSwitch-root .MuiSwitch-track {
-    background-color: #121212!important;
+	background-color: #121212 !important;
 }
 
-.css-1qmwz0i-MuiSwitch-root .MuiSwitch-switchBase.Mui-checked+.MuiSwitch-track {
-    background-color: #2ECA45!important;
+.css-1qmwz0i-MuiSwitch-root .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track {
+	background-color: #2eca45 !important;
 }
 
 .MuiFormControlLabel-label {
@@ -65,5 +64,18 @@
 }
 
 .z-super-top {
-	z-index: 9999!important;
+	z-index: 9999 !important;
+}
+
+html[data-bs-theme="dark"] > body > div > div.swal2-popup.swal2-toast {
+	box-sizing: border-box!important;
+	grid-column: 1/4 !important;
+	grid-row: 1/4 !important;
+	grid-template-columns: min-content auto min-content!important;
+	padding: 1em!important;
+	overflow-y: hidden!important;
+	background: #19191a!important;
+	box-shadow: 0 0 1px hsla(0deg, 0%, 0%, 0.075), 0 1px 2px hsla(0deg, 0%, 0%, 0.075), 1px 2px 4px hsla(0deg, 0%, 0%, 0.075), 1px 3px 8px hsla(0deg, 0%, 0%, 0.075),
+		2px 4px 16px hsla(0deg, 0%, 0%, 0.075)!important;
+	pointer-events: all!important;
 }

@@ -13,6 +13,7 @@ import { loadFull } from "tsparticles";
 
 import type { ISourceOptions } from "tsparticles-engine";
 import LordIcon from "@/components/LordIcon/LordIcon";
+import { Typography } from "@mui/material";
 
 const lordIconProps = {
 	src: "https://cdn.lordicon.com/oxgyjdir.json",
@@ -100,7 +101,12 @@ const Login = () => {
 												Ingresar&nbsp;
 												<FontAwesomeIcon icon={faRightToBracket} />
 											</Button>
+
 										</Card.Body>
+
+										<Card.Footer className="text-center">
+											<Typography	variant="caption">Desarrollado por Sergio Ramírez para AlMaximoTI</Typography>
+										</Card.Footer>
 									</Card>
 								</Col>
 							</Row>

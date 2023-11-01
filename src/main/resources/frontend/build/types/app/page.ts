@@ -1,4 +1,4 @@
-// File: C:\Users\gcdes\OneDrive\Documentos\GitHub\practicajavaweb\src\main\resources\frontend\src\app\page.tsx
+// File: C:\Users\darkm\Desktop\demo\src\main\resources\frontend\src\app\page.tsx
 import * as entry from '../../../src/app/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
