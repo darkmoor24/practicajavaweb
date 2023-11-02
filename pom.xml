@@ -8,7 +8,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.1.5</version>
-        <relativePath /> <!-- lookup parent from repository -->
+        <relativePath />
     </parent>
 
     <groupId>com.practicaweb</groupId>
@@ -17,7 +17,7 @@
 
     <version>1.0</version>
 
-    <!-- <packaging>war</packaging> -->
+    <packaging>war</packaging>
 
     <name>PracticaWeb</name>
 
@@ -67,6 +67,7 @@
     </dependencies>
 
     <build>
+
         <plugins>
             <!-- Instala Node.js y prepara la versión de producción de Next.js -->
             <plugin>
@@ -111,7 +112,7 @@
 
                         <configuration>
                             <!-- <arguments>run compile-react-app</arguments> -->
-                            <arguments>run build</arguments>
+                            <arguments>run compile-react-app</arguments>
                         </configuration>
                     </execution>
                 </executions>

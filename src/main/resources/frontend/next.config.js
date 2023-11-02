@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     output: 'export',
-    distDir: '../static'
+    distDir: './build',
+    basePath: '/practicaweb'
 }
 
 module.exports = nextConfig
