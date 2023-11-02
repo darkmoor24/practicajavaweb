@@ -68,9 +68,6 @@ const FormularioAddUpdProveedorProducto = ({ onClose, updateProveedoresList, pro
 			return NotificacionSweetAlert('warning', 'Llena todos los campos para continuar', 1500);
 		}
 
-		return console.log("z");
-
-
 		updateProveedoresList(formValues);
 	};
 
