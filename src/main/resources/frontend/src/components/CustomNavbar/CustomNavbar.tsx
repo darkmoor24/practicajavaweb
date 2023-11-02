@@ -1,4 +1,4 @@
-import { CustomNavbarProps } from "@/types";
+import { CustomNavbarProps } from "@/@types";
 import React from "react";
 import { Navbar, Col, Container, Row, Offcanvas } from "react-bootstrap";
 import SwitchTheme from "../SwitchTheme/SwitchTheme";

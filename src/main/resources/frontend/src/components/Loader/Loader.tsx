@@ -1,6 +1,6 @@
 "use client";
 
-import { LoaderProps } from "@/types";
+import { LoaderProps } from "@/@types";
 import React from "react";
 import { Spinner } from "react-bootstrap";
 

@@ -1,5 +1,5 @@
 import DataTableRecipient from "@/components/DataTableRecipient/DataTableRecipient";
-import { IPropsAddUpdateProducto, IProveedorProducto } from "@/types";
+import { IPropsAddUpdateProducto, IProveedorProducto } from "@/@types";
 import { mySwal, ModalSweetAlert } from "@/utils/SweetAlerts/SweetAlert";
 import numberCommaSeparator from "@/utils/numberCommaSeparator/numberCommaSeparator";
 import { faAdd, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";

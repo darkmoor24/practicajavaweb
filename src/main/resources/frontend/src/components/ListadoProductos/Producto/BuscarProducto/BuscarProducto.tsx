@@ -10,7 +10,7 @@ import ResultadosBusqueda from "./ResultadosBusqueda/ResultadosBusqueda";
 import { ModalSweetAlert } from "@/utils/SweetAlerts/SweetAlert";
 import EliminarProducto from "../EliminarProducto/EliminarProducto";
 import { getProductos } from "@/utils/httpRequests/httpRequestsProducto/httpRequestsProducto";
-import { FuncionesCRUD, IProducto } from "@/types";
+import { FuncionesCRUD, IProducto } from "@/@types";
 import FullScreenDialogAgregarEditarProducto from "@/components/FullScreenDialogAgregarEditarProducto/FullScreenDialogAgregarEditarProducto";
 import { getProveedoresProducto } from "@/utils/httpRequests/httpRequestsProveedorProducto/httpRequestsProveedorProducto";
 

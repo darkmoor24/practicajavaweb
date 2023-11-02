@@ -1,4 +1,4 @@
-import { CustomHttpResponse } from "@/types";
+import { CustomHttpResponse } from "@/@types";
 import httpRequest from "../httpRequest";
 import endpointPaths from "@/utils/endpointPaths/endpointPaths";
 import httpRequestsPaths from "@/utils/httpRequestsPaths/httpRequestsPaths";

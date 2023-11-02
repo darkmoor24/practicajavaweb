@@ -1,7 +1,7 @@
 "use client";
 
 import DataTableRecipient from "@/components/DataTableRecipient/DataTableRecipient";
-import { IProducto, IPropsResultadosBusqueda } from "@/types";
+import { IProducto, IPropsResultadosBusqueda } from "@/@types";
 import { faAdd, faCheck, faEdit, faTimes, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box, IconButton } from "@mui/material";

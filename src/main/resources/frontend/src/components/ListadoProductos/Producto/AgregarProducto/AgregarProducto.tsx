@@ -1,5 +1,5 @@
 
-import { IPropsAddUpdateProducto } from "@/types";
+import { IPropsAddUpdateProducto } from "@/@types";
 import React from "react";
 import FormularioAddUpdProducto from "../FormularioAddUpdProducto/FormularioAddUpdProducto";
 

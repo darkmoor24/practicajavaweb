@@ -1,4 +1,4 @@
-import { CustomHttpRequestProps } from "@/types";
+import { CustomHttpRequestProps } from "@/@types";
 import validateLocalStorageItemExistence from "../localStorage/validateLocalStorageItemExistence";
 import { AUTH_TOKEN, getApiUrl } from "@/config/config";
 

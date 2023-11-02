@@ -1,4 +1,4 @@
-import { LordIconProps } from "@/types";
+import { LordIconProps } from "@/@types";
 import React from "react";
 import lottie from "lottie-web";
 import { defineElement } from "@lordicon/element";

@@ -5,7 +5,7 @@ import { Button, Col, Container, Row, Form, FloatingLabel } from "react-bootstra
 import { getTiposProducto } from "@/utils/httpRequests/httpRequestsTipoProducto/httpRequestsTipoProducto";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { IPropsFormularioBusqueda } from "@/types";
+import { IPropsFormularioBusqueda } from "@/@types";
 import { getProductos } from "@/utils/httpRequests/httpRequestsProducto/httpRequestsProducto";
 import { NotificationManager } from "react-notifications";
 import { NotificacionSweetAlert } from "@/utils/SweetAlerts/SweetAlert";

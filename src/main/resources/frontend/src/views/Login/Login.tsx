@@ -12,8 +12,9 @@ import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 
 import type { ISourceOptions } from "tsparticles-engine";
-import LordIcon from "@/components/LordIcon/LordIcon";
+// import LordIcon from "@/components/LordIcon/LordIcon";
 import { Typography } from "@mui/material";
+import dynamic from "next/dynamic";
 
 const lordIconProps = {
 	src: "https://cdn.lordicon.com/oxgyjdir.json",
@@ -65,6 +66,8 @@ const particlesOptions: ISourceOptions = {
 };
 
 const Login = () => {
+	const LordIcon = dynamic(() => import("@/components/LordIcon/LordIcon"));
+
 	const router = useRouter();
 
 	const [showLoader, setShowLoader] = useState(true);
@@ -101,11 +104,10 @@ const Login = () => {
 												Ingresar&nbsp;
 												<FontAwesomeIcon icon={faRightToBracket} />
 											</Button>
-
 										</Card.Body>
 
 										<Card.Footer className="text-center">
-											<Typography	variant="caption">Desarrollado por Sergio Ramírez para AlMaximoTI</Typography>
+											<Typography variant="caption">Desarrollado por Sergio Ramírez para AlMaximoTI</Typography>
 										</Card.Footer>
 									</Card>
 								</Col>

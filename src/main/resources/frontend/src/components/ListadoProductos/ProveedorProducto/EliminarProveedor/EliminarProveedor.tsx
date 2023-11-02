@@ -1,5 +1,5 @@
 "use client";
-import {IPropsEliminarProveedor } from "@/types";
+import {IPropsEliminarProveedor } from "@/@types";
 import React from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { NotificationManager } from "react-notifications";

@@ -1,4 +1,4 @@
-import { IPropsAddUpdateProveedorProducto, IProveedor, IProveedorProducto } from "@/types";
+import { IPropsAddUpdateProveedorProducto, IProveedor, IProveedorProducto } from "@/@types";
 import { NotificacionSweetAlert } from "@/utils/SweetAlerts/SweetAlert";
 import { getProveedores } from "@/utils/httpRequests/httpRequestsProveedor/httpRequestsProveedor";
 import { faSave, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";

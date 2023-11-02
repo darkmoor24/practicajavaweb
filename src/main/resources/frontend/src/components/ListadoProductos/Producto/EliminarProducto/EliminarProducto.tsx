@@ -1,5 +1,5 @@
 "use client";
-import { IPropsEliminarProducto } from "@/types";
+import { IPropsEliminarProducto } from "@/@types";
 import { NotificacionSweetAlert } from "@/utils/SweetAlerts/SweetAlert";
 import { deleteProducto } from "@/utils/httpRequests/httpRequestsProducto/httpRequestsProducto";
 import React from "react";

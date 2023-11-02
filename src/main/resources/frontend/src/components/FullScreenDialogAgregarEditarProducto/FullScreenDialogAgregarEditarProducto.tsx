@@ -9,7 +9,7 @@ import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave } from "@fortawesome/free-solid-svg-icons";
-import { IProducto, IPropsFullScreenDialogAgregarEditarProducto } from "@/types";
+import { IProducto, IPropsFullScreenDialogAgregarEditarProducto } from "@/@types";
 import { Typography } from "@mui/material";
 import { Button, Col, Container, Form, OverlayTrigger, Row, Spinner, Tooltip } from "react-bootstrap";
 import React, { forwardRef, useCallback, useEffect, useMemo, useRef, useState } from "react";
