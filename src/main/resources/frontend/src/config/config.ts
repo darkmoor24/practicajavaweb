@@ -1,5 +1,5 @@
 const getApiUrl: Function = (): string => {
-	const BASE_API_URL: string = "http://localhost:8080/api/v1";
+	const BASE_API_URL: string = "http://localhost:8080/practicaweb/api/v1";
 
 	localStorage.setItem("BASE_API_URL", BASE_API_URL);
 
