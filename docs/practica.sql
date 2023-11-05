@@ -167,7 +167,7 @@ DELIMITER ;
 /* DELETE SENTENCES (Bajas físicas)*/
 -- Eliminar producto: Elimina los proveedores y el producto
 DELIMITER $$
-CREATE PROCEDURE deleteProductoById(IN v_id_producto INT)
+CREATE PROCEDURE spDeleteProductoById(IN v_id_producto INT)
 	BEGIN 
 		DELETE FROM proveedor_producto WHERE id_producto = v_id_producto;
         

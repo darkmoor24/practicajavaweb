@@ -32,6 +32,6 @@ public interface IProductoRepository extends JpaRepository<Producto, Integer> {
 
     @Transactional
     @Modifying
-    @Query(value = "{ CALL spDeleteProducto(:idProducto) }", nativeQuery = true)
+    @Query(value = "{ CALL spDeleteProductoById(:idProducto) }", nativeQuery = true)
     void deleteProductoById(int idProducto);
 }
