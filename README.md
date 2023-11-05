@@ -81,7 +81,13 @@ Construir la aplicación desde Maven con la configuración del archivo **pom.xml
     ![Pantalla inicial](/docs/images/main.png)
 
 
-# Guía de uso
+
+
+
+
+
+
+    # Guía de uso
 
 Una vez se ingresó a **http://localhost:8080/practicaweb**, se mostrará la pantalla de bienvenida. 
 Para ingresar al Listado de Productos se debe dar clic en el botón "Ingresar".
@@ -89,6 +95,9 @@ Para ingresar al Listado de Productos se debe dar clic en el botón "Ingresar".
 ## Búsqueda de Productos
 Al ingresar al Listado de Productos, se mostrará un breve formulario de búsqueda. 
 El cual consta de **_Tipo de Producto_ y _Clave de Producto_**.
+
+![Formulario de búsqueda de productos](/docs/images/usage/form-search.png)
+
 
 La búsqueda puede ser realizada de dos modos:
  1. Búsqueda por Tipo de Producto
@@ -115,28 +124,86 @@ En esta tabla es posible **_Agregar_, _Editar_ y _Eliminar_ Productos**, procedi
     
     Es necesario dar clic en el botón "Agregar Producto" situado en la esquina superior derecha de la tabla de registros.
 
-    ![Botón Agregar producto](/docs/images/usage/add-product-button.png)
+    ![Ubicación del botón para agregar un producto](/docs/images/usage/add-product-button.png)
 
 
 
   - Editar Producto 
 
-    Es necesario ubicar el registro que se quiere modificar y dar clic en el botón con ícono de lápiz en la última columna del registro.
+    Es necesario ubicar el registro que se quiere modificar.
+    
+    Posteriormente, se debe dar clic en el botón con ícono de lápiz de color azul en la última columna del registro.
 
-    ![Botón Editar producto](/docs/images/usage/edit-product-button.png)
+    ![Ubicación del botón para editar un producto](/doc/images/usage/edit-product-button.png)
 
 
 Al dar clic en cualquiera de las dos opciones se mostrará un cuadro de diálogo de pantalla completa con el formulario de datos del producto.
 
 Es importante mencionar que si el producto es nuevo, el formulario estará vacío. Si se está editando la información, se mostrarán los datos precargados en el formulario.
 
-#### Agregar Producto
+  #### Agregar Producto
+
+  ![Formulario para agregar un nuevo producto](/doc/images/usage/form-add-product.png)
+
+  #### Editar Producto
+
+  ![Formulario para editar un producto](/doc/images/usage/form-edit-product.png)
+
 
   ### Datos del Producto
+ 
+  En los datos del producto es posible modificar la siguiente información: 
+
+   - Nombre del producto
+   - Clave del producto -> Administrado por la Distribuidora
+   - Costo del producto -> Administrado por la Distribuidora
+   - Tipo de producto -> También se puede entender como categoría
+   - Estatus -> Indica si es un producto activo o inactivo
+
 
   ### Proveedores del Producto
 
+  Los proveedores de cada producto se mostrarán en una tabla dentro del cuadro de diálogo de pantalla completa.
+
+  ![Ubicación de tabla de proveedores](/doc/images/usage/table-proveedores.png)
+
+  Esta tabla tiene el mismo funcionamiento que la tabla de búsqueda de productos.
+
+  Por lo que, los botones para **Agregar, Editar o Eliminar** se encuentran en la misma ubicación
+
+  #### Formulario para Agregar o Editar un proveedor
+
+  ![Formulario para agregar o editar un proveedor](/doc/images/usage/form-proveedor.png)
+
+  #### Confirmación de eliminación de proveedor
+
+  ![Confirmación de eliminación de un proveedor](/doc/images/usage/confirm-delete-proveedor.png)
+
+  ### Guardar el nuevo producto o los cambios realizados
+
+  Para guardar un nuevo producto, o cualquier cambio realizado en su información o la de sus proveedores, se debe dar clic en el botón "Guardar" ubicado en la esquina superior derecha.
+
+  ![Ubicación de botón para guardar cambios](/doc/images/usage/save-product-button.png)
+
+  > [!IMPORTANTE]
+  > Cualquier cambio que se haga sin dar clic en el botón "Guardar" no se verá reflejado en la base de datos.
+
+  Al dar clic en este botón, se mostrará un ícono de carga en el mismo botón. Al completar el proceso de guardado, el cuadro de diálogo de pantalla completa desaparecerá y los registros de la tabla de productos serán actualizados desde la base de datos.
+
+  ![Guardado de producto exitoso](/doc/images/usage/success-save.png)
+
 ## Eliminar Producto
+
+Para eliminar un producto, primero es necesario ubicar el registro que se desea eliminar.
+
+Una vez ubicado el registro, se debe dar clic en el botón con ícono de bote de basura de color rojo. Se mostrará un cuadro de diálogo de confirmación.
+
+![Ubicación del botón para eliminar un producto](/docs/images/usage/delete-product-button.png)
+
+![Cuadro de diálogo de confirmación de baja](/docs/images/usage/confirm-delete.png)
+
+> [!WARNING]
+> Al dar clic en "Sí, eliminar" se eliminarán el producto y todos sus proveedores de la base de datos.
 
 ## Bonus - Dark Mode (no requerido)
 Es posible activar o desactivar el modo oscuro en esta aplicación web. 
@@ -145,4 +212,3 @@ Por defecto está en modo oscuro.
 Para cambiarlo sólo hay que activar o desactivar el botón ubicado en la esquina superior derecha de la pantalla.
 
 ![Switch Dark mode](/docs/images/usage/dark-mode.png)
-
