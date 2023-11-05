@@ -62,7 +62,7 @@ Construir la aplicación desde Maven con la configuración del archivo **pom.xml
 
 ### Instalación
 
- 1. Copiar el archivo **practicaweb.war** generado en la carpeta **/target**
+ 1. Copiar el archivo **practicaweb.war** generado en la carpeta **[/target](https://github.com/darkmoor24/practicajavaweb/releases/tag/v.1.0)**
 
  2. Ubicar la carpeta **/webapps** de la ubicación raíz de **Tomcat 10 (CATALINA_HOME)**, las siguientes rutas son las más usuales en cada sistema operativo: 
      - **Windows**: C:/Program Files/Apache Software Foundation/Tomcat 10.1/webapps
