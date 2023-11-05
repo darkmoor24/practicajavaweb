@@ -2,9 +2,7 @@ package com.practicaweb.apirest.service.producto;
 
 import com.practicaweb.apirest.model.producto.Producto;
 import com.practicaweb.apirest.repositories.producto.IProductoRepository;
-import com.practicaweb.apirest.utils.CreateJSONResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.orm.hibernate5.HibernateJdbcException;
 import org.springframework.stereotype.Service;
 

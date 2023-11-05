@@ -1,12 +1,9 @@
 package com.practicaweb.apirest.model.proveedor;
 
-import com.practicaweb.apirest.model.proveedorproducto.ProveedorProducto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
 
 @Data
 @AllArgsConstructor
@@ -26,8 +23,4 @@ public class Proveedor {
     @Basic
     @Column(name = "descripcion", length = 90)
     private String descripcion;
-
-//    @OneToMany(mappedBy = "proveedorByIdProveedor")
-//    private ArrayList<ProveedorProducto> proveedorProductosByIdProveedor;
-
 }

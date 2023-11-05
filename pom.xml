@@ -53,12 +53,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency> -->
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -69,7 +63,6 @@
     <build>
         <finalName>${project.artifactId}</finalName>
         <plugins>
-            <!-- Instala Node.js y prepara la versión de producción de Next.js -->
             <plugin>
                 <groupId>com.github.eirslett</groupId>
 
@@ -111,15 +104,11 @@
                         </goals>
 
                         <configuration>
-                            <!-- <arguments>run compile-react-app</arguments> -->
                             <arguments>run compile-react-app</arguments>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
-
-            <!-- Copia los ficheros de la versión de producción de Next.js y los agrega a la carpeta /static para desplegar el sitio con la API-->
-
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

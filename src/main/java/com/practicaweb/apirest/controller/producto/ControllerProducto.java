@@ -7,12 +7,8 @@ import com.practicaweb.apirest.service.proveedorproducto.ServiceProveedorProduct
 import com.practicaweb.apirest.utils.Config;
 import com.practicaweb.apirest.utils.CreateJSONResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.embedded.netty.NettyWebServer;
 import org.springframework.http.ResponseEntity;
-import org.springframework.orm.hibernate5.HibernateJdbcException;
 import org.springframework.web.bind.annotation.*;
-
-import java.sql.SQLException;
 import java.util.*;
 
 @RestController

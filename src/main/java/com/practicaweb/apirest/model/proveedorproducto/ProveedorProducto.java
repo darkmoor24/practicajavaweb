@@ -1,7 +1,5 @@
 package com.practicaweb.apirest.model.proveedorproducto;
 
-import com.practicaweb.apirest.model.producto.Producto;
-import com.practicaweb.apirest.model.proveedor.Proveedor;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -38,12 +36,4 @@ public class ProveedorProducto {
     @Basic
     @Column(name = "id_producto", nullable = false)
     private Integer idProducto;
-
-//    @ManyToOne
-//    @JoinColumn(name = "id_proveedor", referencedColumnName = "id_proveedor", nullable = false)
-//    private Proveedor proveedorByIdProveedor;
-
-//    @ManyToOne
-//    @JoinColumn(name = "id_producto", referencedColumnName = "id_producto", nullable = false)
-//    private Producto productoByIdProducto;
 }

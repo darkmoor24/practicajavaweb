@@ -1,7 +1,6 @@
 package com.practicaweb.apirest.model.producto;
 
 import com.practicaweb.apirest.model.proveedorproducto.ProveedorProducto;
-import com.practicaweb.apirest.model.tipoproducto.TipoProducto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -45,11 +44,4 @@ public class Producto {
 
     @Transient
     private ArrayList<ProveedorProducto> proveedoresProducto;
-
-//    @ManyToOne
-//    @JoinColumn(name = "id_tipo_producto", referencedColumnName = "id_tipo_producto", nullable = false)
-//    private TipoProducto tipoProductoByIdTipoProducto;
-
-//    @OneToMany(mappedBy = "productoByIdProducto")
-//    private ArrayList<ProveedorProducto> proveedorProductosByIdProducto;
 }

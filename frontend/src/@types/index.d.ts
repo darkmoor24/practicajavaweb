@@ -75,7 +75,7 @@ declare type IPropsFormularioBusqueda = {
 
 interface FuncionesCRUD {
 	[key: string]: any;
-};
+}
 
 declare type IPropsResultadosBusqueda = {
 	productos: Array<IProducto>;

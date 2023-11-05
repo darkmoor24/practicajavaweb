@@ -25,9 +25,6 @@ public class Config {
 
         public static class ProveedorProducto {
             public static final String GET_PROVEEDORES_PRODUCTO = "/get-proveedores-producto/{idProducto}";
-            // public static final String ADD_PROVEEDORES_PRODUCTO = "/add-proveedores-producto";
-            // public static final String UPDATE_PROVEEDORES_PRODUCTO = "/update-proveedores-producto";
-            // public static final String DELETE_PROVEEDOR_PRODUCTO = "/delete-proveedor-producto/{idProveedorProducto}";
         }
 
         public static class TipoProducto {

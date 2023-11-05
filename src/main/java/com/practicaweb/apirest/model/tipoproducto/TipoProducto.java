@@ -1,14 +1,10 @@
 package com.practicaweb.apirest.model.tipoproducto;
 
-import com.practicaweb.apirest.model.producto.Producto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
-import java.util.ArrayList;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,7 +25,4 @@ public class TipoProducto {
     @Basic
     @Column(name = "descripcion", length = 90)
     private String descripcion;
-
-//    @OneToMany(mappedBy = "tipoProductoByIdTipoProducto")
-//    private ArrayList<Producto> productosByIdTipoProducto;
 }
