@@ -33,6 +33,7 @@ build/
 .vscode/
 
 ### frontend ###
-/src/main/resources/frontend/.next
-/src/main/resources/frontend/node_modules
-/src/main/resources/static
+frontend/.next
+frontend/node_modules
+frontend/package-lock.json
+frontend/build
