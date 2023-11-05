@@ -124,7 +124,7 @@ En esta tabla es posible **_Agregar_, _Editar_ y _Eliminar_ Productos**, procedi
     
     Es necesario dar clic en el botón "Agregar Producto" situado en la esquina superior derecha de la tabla de registros.
 
-    ![Ubicación del botón para agregar un producto](/docs/images/usage/add-product-button.png)
+    ![Ubicación del botón para agregar un producto](/docs/images/usage/add-product-button-fixed.png)
 
 
 
