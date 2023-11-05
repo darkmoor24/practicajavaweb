@@ -146,7 +146,7 @@ Es importante mencionar que si el producto es nuevo, el formulario estará vací
 
   ### Guardar el nuevo producto o los cambios realizados
 
-  > [!IMPORTANTE]
+  > [!NOTE]
   > Para guardar un nuevo producto, o cualquier cambio realizado en su información o la de sus proveedores, se debe dar clic en el botón Guardar ubicado en la esquina superior derecha.
 
 ## Eliminar Producto
