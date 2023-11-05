@@ -43,8 +43,6 @@ La aplicación requiere:
          
     2. La aplicación de Nexjs se despliega por defecto en el puerto **3000**
     3. Acceder a **http://localhost:3000**
- 
-       ![Pantalla inicial](/docs/images/main.png)
 
 
 ## Instalación para producción
@@ -78,6 +76,8 @@ Construir la aplicación desde Maven con la configuración del archivo **pom.xml
           <Host name="localhost" appBase="webapps" unpackWARs="true" autoDeploy="true">  
        ```
  4. Iniciar o reiniciar Tomcat
- 5. Acceder a **http://localhost:8080/practicaweb** 
+ 5. Acceder a **http://localhost:8080/practicaweb**
+
+    ![Pantalla inicial](/docs/images/main.png)
 
 ## Guía de uso
