@@ -43,6 +43,8 @@ La aplicación requiere:
          
     2. La aplicación de Nexjs se despliega por defecto en el puerto **3000**
     3. Acceder a **http://localhost:3000**
+ 
+       ![Pantalla inicial](/docs/images/main.png)
 
 
 ## Instalación para producción
