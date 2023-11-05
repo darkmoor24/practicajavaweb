@@ -185,7 +185,7 @@ Es importante mencionar que si el producto es nuevo, el formulario estará vací
 
   ![Ubicación de botón para guardar cambios](/doc/images/usage/save-product-button.png)
 
-  > [!IMPORTANTE]
+  > [!IMPORTANT]
   > Cualquier cambio que se haga sin dar clic en el botón "Guardar" no se verá reflejado en la base de datos.
 
   Al dar clic en este botón, se mostrará un ícono de carga en el mismo botón. Al completar el proceso de guardado, el cuadro de diálogo de pantalla completa desaparecerá y los registros de la tabla de productos serán actualizados desde la base de datos.
