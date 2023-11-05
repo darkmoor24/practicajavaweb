@@ -134,7 +134,7 @@ En esta tabla es posible **_Agregar_, _Editar_ y _Eliminar_ Productos**, procedi
     
     Posteriormente, se debe dar clic en el botón con ícono de lápiz de color azul en la última columna del registro.
 
-    ![Ubicación del botón para editar un producto](/doc/images/usage/edit-product-button.png)
+    ![Ubicación del botón para editar un producto](/docs/images/usage/edit-product-button.png)
 
 
 Al dar clic en cualquiera de las dos opciones se mostrará un cuadro de diálogo de pantalla completa con el formulario de datos del producto.
@@ -143,11 +143,11 @@ Es importante mencionar que si el producto es nuevo, el formulario estará vací
 
   #### Agregar Producto
 
-  ![Formulario para agregar un nuevo producto](/doc/images/usage/form-add-product.png)
+  ![Formulario para agregar un nuevo producto](/docs/images/usage/form-add-product.png)
 
   #### Editar Producto
 
-  ![Formulario para editar un producto](/doc/images/usage/form-edit-product.png)
+  ![Formulario para editar un producto](/docs/images/usage/form-edit-product.png)
 
 
   ### Datos del Producto
@@ -165,7 +165,7 @@ Es importante mencionar que si el producto es nuevo, el formulario estará vací
 
   Los proveedores de cada producto se mostrarán en una tabla dentro del cuadro de diálogo de pantalla completa.
 
-  ![Ubicación de tabla de proveedores](/doc/images/usage/table-proveedores.png)
+  ![Ubicación de tabla de proveedores](/docs/images/usage/table-proveedores.png)
 
   Esta tabla tiene el mismo funcionamiento que la tabla de búsqueda de productos.
 
@@ -173,24 +173,24 @@ Es importante mencionar que si el producto es nuevo, el formulario estará vací
 
   #### Formulario para Agregar o Editar un proveedor
 
-  ![Formulario para agregar o editar un proveedor](/doc/images/usage/form-proveedor.png)
+  ![Formulario para agregar o editar un proveedor](/docs/images/usage/form-proveedor.png)
 
   #### Confirmación de eliminación de proveedor
 
-  ![Confirmación de eliminación de un proveedor](/doc/images/usage/confirm-delete-proveedor.png)
+  ![Confirmación de eliminación de un proveedor](/docs/images/usage/confirm-delete-proveedor.png)
 
   ### Guardar el nuevo producto o los cambios realizados
 
   Para guardar un nuevo producto, o cualquier cambio realizado en su información o la de sus proveedores, se debe dar clic en el botón "Guardar" ubicado en la esquina superior derecha.
 
-  ![Ubicación de botón para guardar cambios](/doc/images/usage/save-product-button.png)
+  ![Ubicación de botón para guardar cambios](/docs/images/usage/save-product-button.png)
 
   > [!IMPORTANT]
   > Cualquier cambio que se haga sin dar clic en el botón "Guardar" no se verá reflejado en la base de datos.
 
   Al dar clic en este botón, se mostrará un ícono de carga en el mismo botón. Al completar el proceso de guardado, el cuadro de diálogo de pantalla completa desaparecerá y los registros de la tabla de productos serán actualizados desde la base de datos.
 
-  ![Guardado de producto exitoso](/doc/images/usage/success-save.png)
+  ![Guardado de producto exitoso](/docs/images/usage/success-save.png)
 
 ## Eliminar Producto
 
