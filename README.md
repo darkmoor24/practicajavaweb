@@ -120,7 +120,7 @@ En esta tabla es posible **_Agregar_, _Editar_ y _Eliminar_ Productos**, procedi
 
   - Editar Producto 
 
-    Es necesario ubicar el registro que se quiere modificar y dar clic en el botón con ícono de lápiz en la última columna del registro.
+    Es necesario ubicar el registro que se quiere modificar y dar clic en el botón con ícono de lápiz de color azul en la última columna del registro.
 
     ![Ubicación del botón para editar un producto](/doc/images/usage/edit-product-button.png)
 
@@ -139,17 +139,39 @@ Es importante mencionar que si el producto es nuevo, el formulario estará vací
 
 
   ### Datos del Producto
+ 
+  En los datos del producto es posible modificar la siguiente información: 
 
+   - Nombre del producto
+   - Clave del producto -> Administrado por la Distribuidora
+   - Costo del producto -> Administrado por la Distribuidora
+   - Tipo de producto -> También se puede entender como categoría
+   - Estatus -> Indica si es un producto activo o inactivo
 
 
   ### Proveedores del Producto
 
   ### Guardar el nuevo producto o los cambios realizados
 
-  > [!NOTE]
-  > Para guardar un nuevo producto, o cualquier cambio realizado en su información o la de sus proveedores, se debe dar clic en el botón Guardar ubicado en la esquina superior derecha.
+  Para guardar un nuevo producto, o cualquier cambio realizado en su información o la de sus proveedores, se debe dar clic en el botón "Guardar" ubicado en la esquina superior derecha.
+
+  ![Ubicación de botón para guardar cambios](/doc/images/usage/save-product-button.png)
+
+  > [!IMPORTANTE]
+  > Cualquier cambio que se haga sin dar clic en el botón "Guardar" no se verá reflejado en la base de datos.
 
 ## Eliminar Producto
+
+Para eliminar un producto, primero es necesario ubicar el registro que se desea eliminar.
+
+Una vez ubicado el registro, se debe dar clic en el botón con ícono de bote de basura de color rojo. Se mostrará un cuadro de diálogo de confirmación.
+
+![Ubicación del botón para eliminar un producto](/docs/images/usage/delete-product-button.png)
+
+![Cuadro de diálogo de confirmación de baja](/docs/images/usage/confirm-delete.png)
+
+> [!WARNING]
+> Al dar clic en "Sí, eliminar" se eliminarán el producto y todos sus proveedores de la base de datos.
 
 ## Bonus - Dark Mode (no requerido)
 Es posible activar o desactivar el modo oscuro en esta aplicación web. 
