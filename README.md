@@ -80,7 +80,14 @@ Construir la aplicación desde Maven con la configuración del archivo **pom.xml
 
     ![Pantalla inicial](/docs/images/main.png)
 
-# Guía de uso
+
+
+
+
+
+
+
+    # Guía de uso
 
 Una vez se ingresó a **http://localhost:8080/practicaweb**, se mostrará la pantalla de bienvenida. 
 Para ingresar al Listado de Productos se debe dar clic en el botón "Ingresar".
@@ -120,7 +127,11 @@ En esta tabla es posible **_Agregar_, _Editar_ y _Eliminar_ Productos**, procedi
 
   - Editar Producto 
 
-    Es necesario ubicar el registro que se quiere modificar y dar clic en el botón con ícono de lápiz de color azul en la última columna del registro.
+    Es necesario ubicar el registro que se quiere modificar. Se puede utilizar el buscador de la tabla de registros.
+
+    ![Ubicación del botón para buscar registros en la tabla](/doc/images/usage/table-search-button.png)
+    
+    Posteriormente, se debe dar clic en el botón con ícono de lápiz de color azul en la última columna del registro.
 
     ![Ubicación del botón para editar un producto](/doc/images/usage/edit-product-button.png)
 
@@ -151,6 +162,22 @@ Es importante mencionar que si el producto es nuevo, el formulario estará vací
 
   ### Proveedores del Producto
 
+  Los proveedores de cada producto se mostrarán en una tabla dentro del cuadro de diálogo de pantalla completa.
+
+  ![Ubicación de tabla de proveedores](/doc/images/usage/table-proveedores.png)
+
+  Esta tabla tiene el mismo funcionamiento que la tabla de búsqueda de productos.
+
+  Por lo que, los botones para **Agregar, Editar o Eliminar** se encuentran en la misma ubicación
+
+  #### Formulario para Agregar o Editar un proveedor
+
+  ![Formulario para agregar o editar un proveedor](/doc/images/usage/form-proveedor.png)
+
+  #### Confirmación de eliminación de proveedor
+
+  ![Confirmación de eliminación de un proveedor](/doc/images/usage/confirm-delete-proveedor.png)
+
   ### Guardar el nuevo producto o los cambios realizados
 
   Para guardar un nuevo producto, o cualquier cambio realizado en su información o la de sus proveedores, se debe dar clic en el botón "Guardar" ubicado en la esquina superior derecha.
@@ -160,9 +187,13 @@ Es importante mencionar que si el producto es nuevo, el formulario estará vací
   > [!IMPORTANTE]
   > Cualquier cambio que se haga sin dar clic en el botón "Guardar" no se verá reflejado en la base de datos.
 
+  Al dar clic en este botón, se mostrará un ícono de carga en el mismo botón. Al completar el proceso de guardado, el cuadro de diálogo de pantalla completa desaparecerá y los registros de la tabla de productos serán actualizados desde la base de datos.
+
+  ![Guardado de producto exitoso](/doc/images/usage/success-save.png)
+
 ## Eliminar Producto
 
-Para eliminar un producto, primero es necesario ubicar el registro que se desea eliminar.
+Para eliminar un producto, primero es necesario ubicar el registro que se desea eliminar. Se puede utilizar el buscador de la tabla de registros.
 
 Una vez ubicado el registro, se debe dar clic en el botón con ícono de bote de basura de color rojo. Se mostrará un cuadro de diálogo de confirmación.
 
