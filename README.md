@@ -80,4 +80,69 @@ Construir la aplicación desde Maven con la configuración del archivo **pom.xml
 
     ![Pantalla inicial](/docs/images/main.png)
 
-## Guía de uso
+
+# Guía de uso
+
+Una vez se ingresó a **http://localhost:8080/practicaweb**, se mostrará la pantalla de bienvenida. 
+Para ingresar al Listado de Productos se debe dar clic en el botón "Ingresar".
+
+## Búsqueda de Productos
+Al ingresar al Listado de Productos, se mostrará un breve formulario de búsqueda. 
+El cual consta de **_Tipo de Producto_ y _Clave de Producto_**.
+
+La búsqueda puede ser realizada de dos modos:
+ 1. Búsqueda por Tipo de Producto
+
+    ![Búsqueda por Tipo de Producto](/docs/images/usage/search-tipo.png)
+
+ 2. Búsqueda por Tipo de Producto y Clave de Producto
+    
+    ![Búsqueda por Tipo de Producto y Clave de Producto](/docs/images/usage/search-tipo-clave.png)
+
+Al realizar la búsqueda, se mostrará una tabla con todos los registros coincidentes con los criterios de búsqueda ingresados.
+
+![Tabla de registros de Productos](/docs/images/usage/table-productos.png)
+
+En esta tabla es posible **_Agregar_, _Editar_ y _Eliminar_ Productos**, procedimientos descritos en la siguientes secciones.
+
+## Agregar / Editar Producto
+
+  Una vez se haya realizado la búsqueda de productos, será posible Agregar o Editar productos, así como sus proveedores y su información(Clave y Costo de proveedor).
+
+  El formulario de datos es el mismo en ambos casos, por lo que para:
+
+  - Agregar Producto
+    
+    Es necesario dar clic en el botón "Agregar Producto" situado en la esquina superior derecha de la tabla de registros.
+
+    ![Botón Agregar producto](/docs/images/usage/add-product-button.png)
+
+
+
+  - Editar Producto 
+
+    Es necesario ubicar el registro que se quiere modificar y dar clic en el botón con ícono de lápiz en la última columna del registro.
+
+    ![Botón Editar producto](/docs/images/usage/edit-product-button.png)
+
+
+Al dar clic en cualquiera de las dos opciones se mostrará un cuadro de diálogo de pantalla completa con el formulario de datos del producto.
+
+Es importante mencionar que si el producto es nuevo, el formulario estará vacío. Si se está editando la información, se mostrarán los datos precargados en el formulario.
+
+#### Agregar Producto
+
+  ### Datos del Producto
+
+  ### Proveedores del Producto
+
+## Eliminar Producto
+
+## Bonus - Dark Mode (no requerido)
+Es posible activar o desactivar el modo oscuro en esta aplicación web. 
+
+Por defecto está en modo oscuro.
+Para cambiarlo sólo hay que activar o desactivar el botón ubicado en la esquina superior derecha de la pantalla.
+
+![Switch Dark mode](/docs/images/usage/dark-mode.png)
+
