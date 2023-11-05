@@ -96,6 +96,9 @@ Para ingresar al Listado de Productos se debe dar clic en el botón "Ingresar".
 Al ingresar al Listado de Productos, se mostrará un breve formulario de búsqueda. 
 El cual consta de **_Tipo de Producto_ y _Clave de Producto_**.
 
+![Formulario de búsqueda de productos](/docs/images/usage/form-search.png)
+
+
 La búsqueda puede ser realizada de dos modos:
  1. Búsqueda por Tipo de Producto
 
