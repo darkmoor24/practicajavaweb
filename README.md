@@ -130,9 +130,7 @@ En esta tabla es posible **_Agregar_, _Editar_ y _Eliminar_ Productos**, procedi
 
   - Editar Producto 
 
-    Es necesario ubicar el registro que se quiere modificar. Se puede utilizar el buscador de la tabla de registros.
-
-    ![Ubicación del botón para buscar registros en la tabla](/doc/images/usage/table-search-button.png)
+    Es necesario ubicar el registro que se quiere modificar.
     
     Posteriormente, se debe dar clic en el botón con ícono de lápiz de color azul en la última columna del registro.
 
@@ -196,7 +194,7 @@ Es importante mencionar que si el producto es nuevo, el formulario estará vací
 
 ## Eliminar Producto
 
-Para eliminar un producto, primero es necesario ubicar el registro que se desea eliminar. Se puede utilizar el buscador de la tabla de registros.
+Para eliminar un producto, primero es necesario ubicar el registro que se desea eliminar.
 
 Una vez ubicado el registro, se debe dar clic en el botón con ícono de bote de basura de color rojo. Se mostrará un cuadro de diálogo de confirmación.
 
